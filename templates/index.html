@@ -36,11 +36,11 @@
   let categoryKeys
   $.getJSON('../data/nodes.json', ((data) => {nodes = data}))
   $.getJSON('../data/edges.json', ((data) => {edges = data}))
-  $.getJSON('../data/dates.json', ((data) => {dates = data}))
+  $.getJSON('../data/dates.json', ((data) => {console.log(dates); dates = data}))
   $.getJSON('../data/sectors.json', ((data) => {sectors = data}))
   $.getJSON('../data/banks.json', ((data) => {banks = data}))
   $.getJSON('../data/categoryKeys.json', ((data) => {categoryKeys = data}))
-  console.log(dates)  
+  console.log(banks)  
 </script>
 
 <div id="canvas" class="flex-container">

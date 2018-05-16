@@ -2,7 +2,7 @@
 
 var loadFile = function (filePath, done) {
     console.log("load")
-    var xhr = new XMLHTTPRequest();
+    var xhr = new XMLHttpRequest();
     xhr.onload = function () { return done(this.responseText) }
     xhr.open("GET", filePath, true);
     xhr.send();

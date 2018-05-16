@@ -28,12 +28,19 @@
     <script type="text/javascript" src="../data/categoryKeys.json"></script>
     -->
 <script type="text/javascript">
+  let nodes
+  let edges
+  let dates
+  let sectors
   let banks
-  $.getJSON('../data/banks.json', ((data) => { 
-      console.log("data ", data)
-      banks =JSON.parse(data.responseText)}
-    ))
-  console.log(banks)  
+  let categoryKeys
+  $.getJSON('../data/nodes.json', ((data) => {nodes = data}))
+  $.getJSON('../data/edges.json', ((data) => {edges = data}))
+  $.getJSON('../data/dates.json', ((data) => {dates = data}))
+  $.getJSON('../data/sectors.json', ((data) => {sectors = data}))
+  $.getJSON('../data/banks.json', ((data) => {banks = data}))
+  $.getJSON('../data/categoryKeys.json', ((data) => {categoryKeys = data}))
+  console.log(dates)  
 </script>
 
 <div id="canvas" class="flex-container">

@@ -10,7 +10,7 @@ var loadFile = function (filePath, done) {
 
 let jsonImport = (url,result) => {
     console.log("import")
-    loadFile(file,((responseText) => {
+    loadFile(url,((responseText) => {
         result=responseText
     }))
 }

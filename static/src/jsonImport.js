@@ -11,6 +11,7 @@ var loadFile = function (filePath, done) {
 let jsonImport = (url,result) => {
     console.log("import")
     loadFile(url,((responseText) => {
+        console.log(responseText)
         result=responseText
     }))
 }

@@ -1,19 +1,16 @@
 "use strict";
 
-jsonImport = (url,data) => { 
-
-  xhr = new XMLHttpRequest();
-
-  if (!xhr) throw 'XMLHttpRequest not supported, cannot load the file.'
-
-  xhr.open('GET', url, true);
-  xhr.onreadystatechange = function() {
-    if (xhr.readyState === 4) {
-        data = JSON.parse(xhr.responseText);
-
-    if (typeof obj == 'array') console.log("is array");
-        
+var loadFile = function (filePath, done) {
+    console.log("load")
+    var xhr = new XMLHTTPRequest();
+    xhr.onload = function () { return done(this.responseText) }
+    xhr.open("GET", filePath, true);
     xhr.send();
-   }
-  }
+}
+
+let jsonImport = (url,result) => {
+    console.log("import")
+    loadFile(file,((responseText) => {
+        result=responseText
+    }))
 }

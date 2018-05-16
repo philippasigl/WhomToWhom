@@ -19,6 +19,7 @@
     <!--<script type="text/javascript" src="../static/file-saver/filesaver.min.js"></script>-->
     <script type="text/javascript" src="../static/canvas-toBlob.js"></script>
     <script type="text/javascript" src="../static/src/utils.js"></script>
+    <script type="text/javascript" src="../static/src/jsonImport.js"></script>
 
     <!--
     <script type="text/javascript" src="../data/nodes.json"></script>
@@ -35,13 +36,8 @@
   let sectors
   let banks
   let categoryKeys
-  $.getJSON('../data/nodes.json', ((data) => {nodes = data}))
-  $.getJSON('../data/edges.json', ((data) => {edges = data}))
-  $.getJSON('../data/dates.json', ((data) => { console.log(data); dates = data; console.log(dates);}))
-  $.getJSON('../data/sectors.json', ((data) => {sectors = data}))
-  $.getJSON('../data/banks.json', ((data) => {banks = data}))
-  $.getJSON('../data/categoryKeys.json', ((data) => {categoryKeys = data}))
-  console.log(banks)  
+  jsonImport('../data/dates.json',dates) 
+  console.log(dates)  
 </script>
 
 <div id="canvas" class="flex-container">
@@ -217,7 +213,7 @@
         jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
         jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
         //slider for scales
-        setSlider = (sliderID,startValues,rangeValues) => {
+        let setSlider = (sliderID,startValues,rangeValues) => {
             noUiSlider.create(sliderID, {
             start: startValues,
             range: {

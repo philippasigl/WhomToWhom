@@ -29,7 +29,10 @@
     -->
 <script type="text/javascript">
   let banks
-  $.getJSON('../data/banks.json', ((data) => { banks =JSON.parse(data.responseText)}))
+  $.getJSON('../data/banks.json', ((data) => { 
+      console.log("data ", data)
+      banks =JSON.parse(data.responseText)}
+    ))
   console.log(banks)  
 </script>
 

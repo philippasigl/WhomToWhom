@@ -315,12 +315,35 @@ const set_edge_color = () => {
 const unset_edge_color = () => {
     edgeColorsUniform()
 }
+//------SLIDERS--------------------------//
+//slider for scales
+const setSlider = (sliderID,startValues,rangeValues) => {
+    noUiSlider.create(sliderID, {
+    start: startValues,
+    range: {
+        'min': [  rangeValues[0] ],
+        'max': [ rangeValues[1] ]
+    },
+    connect: true
+    })
+}
+//slider determining which edges will be shown according to percentile rank
+const setEdgeRankSlider = (sliderID,startValue) => {
+    noUiSlider.create(sliderID, {
+    start: startValue,
+    range: {
+        min: [0],
+        max: [1]
+    }
+    })
+}
 
 //------EXECUTE AND EVENT LISTENERS------//
-init()
-set_nodeRange()
-set_edgeRange()    
-set_edgeCutoff()
+//in index.html
+//init()
+//set_nodeRange()
+//set_edgeRange()    
+//set_edgeCutoff()
 //------CURRENTLY UNUSED------//
 /*
 exportNetwork = () => {

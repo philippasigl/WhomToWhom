@@ -7,242 +7,211 @@
     <link href="../static/vis/dist/vis-network.min.css" rel="stylesheet" />
     <link href="../static/nouislider/distribute/nouislider.min.css" rel="stylesheet"/>
     <link href="../static/css/styleCustom.css" rel="stylesheet" />
+    <script type="text/javascript" src="../static/jquery/dist/jquery.js"></script>
+    <script type="text/javascript" src="../static/nouislider/distribute/nouislider.min.js"></script>
+    <!--<script type="text/javascript" src="../static/file-saver/filesaver.min.js"></script>-->
+    <script type="text/javascript" src="../static/canvas-toBlob.js"></script>
+    <script type="text/javascript" src="../static/src/utils.js"></script>
+    <script type="text/javascript" src="../static/vis/examples/network/exampleUtil.js"></script>
+    <script type="text/javascript" src="../static/vis/dist/vis.js"></script>
+    <script type="text/javascript" src="../static/src/options.js"></script>
+    <script type="text/javascript" src="../static/src/network.js"></script>
 
     <title>Data Explorer</title>
 </head>
 
 <body>
 <h2 id="print">Financial Networks Explorer</h2>
-
-    <script type="text/javascript" src="../static/jquery/dist/jquery.js"></script>
-    <script type="text/javascript" src="../static/nouislider/distribute/nouislider.min.js"></script>
-    <!--<script type="text/javascript" src="../static/file-saver/filesaver.min.js"></script>-->
-    <script type="text/javascript" src="../static/canvas-toBlob.js"></script>
-    <script type="text/javascript" src="../static/src/utils.js"></script>
-
-    <!--
-    <script type="text/javascript" src="../data/nodes.json"></script>
-    <script type="text/javascript" src="../data/edges.json"></script>
-    <script type="text/javascript" src="../data/dates.json"></script>
-    <script type="text/javascript" src="../data/sectors.json"></script>
-    <script type="text/javascript" src="../data/banks.json"></script>
-    <script type="text/javascript" src="../data/categoryKeys.json"></script>
-    -->
-<script type="text/javascript">
-
-</script>
-
-<div id="canvas" class="flex-container">
-    <div id="controls" class="flex-item">
-            <div class="option-list">
-
-                <!--<div class="control-option">
-                    <input id="hist_network_select" type="checkBox" class="checkbox" onclick="switch_history()"></input>
-                    <label for="hist_network_select">Fix to saved positions</label>
-                </div>-->
-            
-                <div class="flex-item" id="control-section">
-                    <p>Network</p>
-                    <div class="control-option">
-                        <select class="Select-control" id="date" value="init()" onChange="switch_date()"></select>
-                        <label for="date">Date</label>
-                    </div>
-
-                    <div class="control-option">
-                        <select class="Select-control" id="region" value="init()" onChange="switch_region()"></select>
-                        <label for="region">Region</label>
-                    </div>
-
-                    <div class="control-option">
-                        <select class="Select-control" id="asset" value="init()" onChange="switch_asset()"></select>
-                        <label for="asset">Asset</label>
-                    </div>    
-                </div>
-
-                <div class="flex-item" id="control-section">
-                    <p>Statistics</p>
-                    <div class="control-option">    
-                        <div class="simpleOutput" id="herfindahl" value="herfindahl()"></div>
-                        <label for="herfindahl">Herfindahl</label>
-                    </div>
-                </div>
-
-                <div class="flex-item" id="control-section">
-                <p>Nodes</p>
-                    <div class="control-option">
-                        <select class="Select-control" id="nodeName" onChange="switch_nodeName()"></select>
-                        <label for="nodeName">Node labels</label>
-                    </div>
-
-                    <div class="control-option">
-                        <select class="Select-control" id="nodeSize" onChange="switch_nodeSizeKey()"></select>
-                        <label for="nodeSize">Node size</label>
-                    </div>
-
-                    <div class="control-option">
-                        <div id="nodeSlider" class="slider"></div>
-                        <label for="nodeSlider">Node scale</label>
-                    </div>
-
-                    <div class="control-option">
-                        <select class="Select-control" id="nodeColor" onChange="switch_nodeColor()"></select>
-                        <label for="nodeSize">Node color</label>
-                    </div>
-
-                </div>
-
-                <div class="flex-item" id="control-section">
-                <p>Edges</p>
-                    <div class="control-option">
-                        <select class="Select-control" id="edgeSize" onChange="switch_edgeSizeKey()"></select>
-                        <label for="edgeSize">Edge width</label>
-                    </div>
-
-                    <div class="control-option">
-                        <div id="edgeSlider" class="slider"></div>
-                        <label for="edgeSlider">Edge scale</label>
-                    </div>
-
-                    <div class="control-option">
-                        <div id="edgeSlider2" class="slider"></div>
-                        <label for="edgeSlider2">Edge cutoff</label>
-                    </div>
-
-                    <div class="control-option">
-                        <input type="checkBox" class="checkbox" id="edge_node_select" onclick="switch_edge_color()"></input>
-                        <label for="color_edge_select">Color edges according to trend</label>
-                    </div>
-
-                    <div class="control-option">
-                        <input type="checkBox" class="checkbox" id="edge_largest_largest" onclick="switch_edge_color_largest()"></input>
-                        <label for="color_edge_largest">Highlight largest edges</label>
-                    </div>
-                </div>
-
-                <div class='control-option' id="export-button">
-                        <input class="button" type="button" onclick="exportImage2()" value="Export PNG"></input>
-                    </div>
-                <!--<div class="control-option" id="sliders"></div>-->
-
-                <!--<div class='control-option'>
-                        <input id="export-button" class="button" type="button" onclick="exportNetwork()" value="export"></input>
-                    </div>
-                <div class="control-option" id="vis-config"></div>-->
-
-            </div>
-
-                  
-    </div>
-
-    <div id="network" class="flex-item">
-           <!-- <div id="config"></div>-->
-    </div>
     
-    <script type="text/javascript">
-        let nodes=[]
-        let edges=[]
-        let dates=[]
-        let sectors=[]
-        let banks=[]
-        let categoryKeys=[]
-        let regions=[]
-        let assets=[]
+    <div id="canvas" class="flex-container">
+        <div id="controls" class="flex-item">
+                <div class="option-list">
+
+                    <!--<div class="control-option">
+                        <input id="hist_network_select" type="checkBox" class="checkbox" onclick="switch_history()"></input>
+                        <label for="hist_network_select">Fix to saved positions</label>
+                    </div>-->
+                
+                    <div class="flex-item" id="control-section">
+                        <p>Network</p>
+                        <div class="control-option">
+                            <select class="Select-control" id="date" value="init()" onChange="switch_date()"></select>
+                            <label for="date">Date</label>
+                        </div>
+
+                        <div class="control-option">
+                            <select class="Select-control" id="region" value="init()" onChange="switch_region()"></select>
+                            <label for="region">Region</label>
+                        </div>
+
+                        <div class="control-option">
+                            <select class="Select-control" id="asset" value="init()" onChange="switch_asset()"></select>
+                            <label for="asset">Asset</label>
+                        </div>    
+                    </div>
+
+                    <div class="flex-item" id="control-section">
+                        <p>Statistics</p>
+                        <div class="control-option">    
+                            <div class="simpleOutput" id="herfindahl" value="herfindahl()"></div>
+                            <label for="herfindahl">Herfindahl</label>
+                        </div>
+                    </div>
+
+                    <div class="flex-item" id="control-section">
+                    <p>Nodes</p>
+                        <div class="control-option">
+                            <select class="Select-control" id="nodeName" onChange="switch_nodeName()"></select>
+                            <label for="nodeName">Node labels</label>
+                        </div>
+
+                        <div class="control-option">
+                            <select class="Select-control" id="nodeSize" onChange="switch_nodeSizeKey()"></select>
+                            <label for="nodeSize">Node size</label>
+                        </div>
+
+                        <div class="control-option">
+                            <div id="nodeSlider" class="slider"></div>
+                            <label for="nodeSlider">Node scale</label>
+                        </div>
+
+                        <div class="control-option">
+                            <select class="Select-control" id="nodeColor" onChange="switch_nodeColor()"></select>
+                            <label for="nodeSize">Node color</label>
+                        </div>
+
+                    </div>
+
+                    <div class="flex-item" id="control-section">
+                    <p>Edges</p>
+                        <div class="control-option">
+                            <select class="Select-control" id="edgeSize" onChange="switch_edgeSizeKey()"></select>
+                            <label for="edgeSize">Edge width</label>
+                        </div>
+
+                        <div class="control-option">
+                            <div id="edgeSlider" class="slider"></div>
+                            <label for="edgeSlider">Edge scale</label>
+                        </div>
+
+                        <div class="control-option">
+                            <div id="edgeSlider2" class="slider"></div>
+                            <label for="edgeSlider2">Edge cutoff</label>
+                        </div>
+
+                        <div class="control-option">
+                            <input type="checkBox" class="checkbox" id="edge_node_select" onclick="switch_edge_color()"></input>
+                            <label for="color_edge_select">Color edges according to trend</label>
+                        </div>
+
+                        <div class="control-option">
+                            <input type="checkBox" class="checkbox" id="edge_largest_largest" onclick="switch_edge_color_largest()"></input>
+                            <label for="color_edge_largest">Highlight largest edges</label>
+                        </div>
+                    </div>
+
+                    <div class='control-option' id="export-button">
+                            <input class="button" type="button" onclick="exportImage2()" value="Export PNG"></input>
+                        </div>
+                    <!--<div class="control-option" id="sliders"></div>-->
+
+                    <!--<div class='control-option'>
+                            <input id="export-button" class="button" type="button" onclick="exportNetwork()" value="export"></input>
+                        </div>
+                    <div class="control-option" id="vis-config"></div>-->
+
+                </div>
+
+                    
+        </div>
+
+        <div id="network" class="flex-item">
+            <!-- <div id="config"></div>-->
+        </div>
         
-        let requestURL = '../data.json'
-        let request = new XMLHttpRequest()
-        request.open('GET', requestURL)
-        request.responseType = 'json'
-        request.send() 
-        request.onload = () => {
-            nodes = request.response.nodes
-            edges = request.response.edges
-            sectors = request.response.sectors
-            banks = request.response.banks
-            categoryKeys = request.response.categoryKeys
-            dates = request.response.dates
-            regions = request.response.regions
-            assets = request.response.assets 
+        <script type="text/javascript">
+            let nodes=[]
+            let edges=[]
+            let dates=[]
+            let sectors=[]
+            let banks=[]
+            let categoryKeys=[]
+            let regions=[]
+            let assets=[]
+            
+            let requestURL = '../data.json'
+            let request = new XMLHttpRequest()
+            request.open('GET', requestURL)
+            request.responseType = 'json'
+            request.send() 
+            request.onload = () => {
+                nodes = request.response.nodes
+                edges = request.response.edges
+                sectors = request.response.sectors
+                banks = request.response.banks
+                categoryKeys = request.response.categoryKeys
+                dates = request.response.dates
+                regions = request.response.regions
+                assets = request.response.assets 
 
-        //region
-        $.each(regions, function(index, value) {
-            if (value.region == 'Euro Area') {
-                jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
-            }
-            else {
-                jQuery("#region").append('<option value="' + value.region + '">' + value.region + '</option>');
-            }
-        })
-        //asset
-        $.each(assets, function(index, value) {
-            if (value.asset == 'total') {
-                jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
-            }
-            else {
-                jQuery("#asset").append('<option value="' + value.asset + '">' + value.asset + '</option>');
-            }
-        })
-        //dates
-        $.each(dates, function(index, value) {
-            if (index == dates.length-1) {
-                jQuery("#date").append('<option value="' + value.dateID + '" selected>' + value.date + '</option>');
-            }
-            else {
-                jQuery("#date").append('<option value="' + value.dateID + '">' + value.date + '</option>');
-            }
-        })
+                //region
+                $.each(regions, function(index, value) {
+                    if (value.region == 'Euro Area') {
+                        jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
+                    }
+                    else {
+                        jQuery("#region").append('<option value="' + value.region + '">' + value.region + '</option>');
+                    }
+                })
+                //asset
+                $.each(assets, function(index, value) {
+                    if (value.asset == 'total') {
+                        jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
+                    }
+                    else {
+                        jQuery("#asset").append('<option value="' + value.asset + '">' + value.asset + '</option>');
+                    }
+                })
+                //dates
+                $.each(dates, function(index, value) {
+                    if (index == dates.length-1) {
+                        jQuery("#date").append('<option value="' + value.dateID + '" selected>' + value.date + '</option>');
+                    }
+                    else {
+                        jQuery("#date").append('<option value="' + value.dateID + '">' + value.date + '</option>');
+                    }
+                })
 
-        //node size
-        $.each(categoryKeys, function(index, value) {
-            if (index == categoryKeys.length-1) {
-                jQuery("#nodeSize").append('<option value="' + value + '" selected>' + value + '</option>')
-            }
-            else {
-                jQuery("#nodeSize").append('<option value="' + value + '">' + value + '</option>')
-            }
-        })
-        //node color
-        jQuery("#nodeColor").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
-        jQuery("#nodeColor").append('<option value="' + 'none' + '">' + 'none' + '</option>')
-        //edge size
-        jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
-        jQuery("#edgeSize").append('<option value="' + 'change to last period' + '">' + 'change to last period' + '</option>')
-        jQuery("#edgeSize").append('<option value="' + 'change to prior year' + '">' + 'change to prior year' + '</option>')
-        jQuery("#edgeSize").append('<option value="' + 'change to two years prior' + '">' + 'change to two years prior' + '</option>')
-        //bank name
-        jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
-        jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
-        jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
-        
-        }
+                //node size
+                $.each(categoryKeys, function(index, value) {
+                    if (index == categoryKeys.length-1) {
+                        jQuery("#nodeSize").append('<option value="' + value + '" selected>' + value + '</option>')
+                    }
+                    else {
+                        jQuery("#nodeSize").append('<option value="' + value + '">' + value + '</option>')
+                    }
+                })
+                //node color
+                jQuery("#nodeColor").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
+                jQuery("#nodeColor").append('<option value="' + 'none' + '">' + 'none' + '</option>')
+                //edge size
+                jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
+                jQuery("#edgeSize").append('<option value="' + 'change to last period' + '">' + 'change to last period' + '</option>')
+                jQuery("#edgeSize").append('<option value="' + 'change to prior year' + '">' + 'change to prior year' + '</option>')
+                jQuery("#edgeSize").append('<option value="' + 'change to two years prior' + '">' + 'change to two years prior' + '</option>')
+                //bank name
+                jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
+                jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
+                jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
 
-        //slider for scales
-        setSlider = (sliderID,startValues,rangeValues) => {
-            noUiSlider.create(sliderID, {
-            start: startValues,
-            range: {
-                'min': [  rangeValues[0] ],
-                'max': [ rangeValues[1] ]
-            },
-            connect: true
-            })
-        }
-        //slider determining which edges will be shown according to percentile rank
-        setEdgeRankSlider = (sliderID,startValue) => {
-            noUiSlider.create(sliderID, {
-            start: startValue,
-            range: {
-                min: [0],
-                max: [1]
+                //------EXECUTE AND EVENT LISTENERS------//
+                init()
+                set_nodeRange()
+                set_edgeRange()    
+                set_edgeCutoff()
             }
-            })
-        }
-
-    </script>
+        </script>
+        </div>
     </div>
-</div>
 
-<script type="text/javascript" src="../static/vis/examples/network/exampleUtil.js"></script>
-<script type="text/javascript" src="../static/vis/dist/vis.js"></script>
-<script type="text/javascript" src="../static/src/options.js"></script>
-<script type="text/javascript" src="../static/src/network.js"></script>
 </body>

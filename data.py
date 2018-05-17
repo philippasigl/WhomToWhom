@@ -238,7 +238,7 @@ def save_data():
     sectors = set_sectors(nodes)
     banks = set_names(nodes)
     data = {"edges": edges,"nodes":nodes, "categoryKeys": categoryKeys, "dates": dates, "sectors":sectors,"banks":banks}
-
+    
     filename = 'data.json'
     with open (filename,'w') as file:
         json.dump(data,file)

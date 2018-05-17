@@ -32,7 +32,7 @@
 <script type="text/javascript">
   let nodes
   let edges
-  //let dates=[]
+  let data=[]
   let sectors
   let banks
   let categoryKeys
@@ -42,9 +42,11 @@
   request.open('GET', requestURL)
   request.responseType = 'json'
   request.send() 
-  let data = request.response
-  console.log("re",request.response)
-  console.log("dates",dates) 
+  request.onload = function() {
+  data = request.response;
+  console.log(data)
+  }
+  
 </script>
 
 <div id="canvas" class="flex-container">

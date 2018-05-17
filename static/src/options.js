@@ -161,16 +161,7 @@ const nodeColorsCustom = () => {
 }
 
 const edgeColorsByTrend = () => {
-  console.log("h",edgeColorIsOn)
-    //var nodesArray = objectToArray(network.body.data.nodes._data);
-    //var edgesArray = objectToArray(network.body.data.edges._data);
-    //edgesArray=edgesArray.map((edge) => {edge.color = {color: COLORS[edge.trend], opacity: 0.2, highlight: COLORS[edge.trend]}; return edge});
-    let change = 'none'
-    if (edgeSizeKey == 'absolute') change='trend'
-    if (edgeSizeKey == 'change to last period') change='trend'
-    
-    _edges.map((edge) => {edge.color = {color: COLORS[edge[change]], opacity: 0.2, highlight: COLORS[edge[change]]}; return edge})
-
+    _edges.map((edge) => {edge.color = {color: COLORS[edge['trend']], opacity: 0.2, highlight: COLORS[edge['trend']]}; return edge})
     network.setData({nodes: _nodes, edges: _edges})
 }
 

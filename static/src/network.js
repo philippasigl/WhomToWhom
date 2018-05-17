@@ -293,6 +293,9 @@ const set_change = () => {
         else edge['trend'] == 'none'
         console.log("1 ",edge)
         console.log("2 ",compEdge)
+        //negative edgeSizes inverted to ensure scaling works
+        if (edgeSize < 0) edgeSize = (-1)*edgeSize
+        
         edge.change=edgeSize
     })
     var data = {nodes: _nodes, edges: _edges}

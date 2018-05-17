@@ -168,7 +168,7 @@
         $.each(regions, function(index, value) {
             console.log("region")
             console.log(value)
-            if (value == 'Euro Area') {
+            if (value.region == 'Euro Area') {
                 jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
             }
             else {
@@ -179,7 +179,7 @@
         $.each(assets, function(index, value) {
             console.log("asset")
             console.log(value)
-            if (value == 'total') {
+            if (value.asset == 'total') {
                 jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
             }
             else {

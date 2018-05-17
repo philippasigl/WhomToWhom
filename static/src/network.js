@@ -6,7 +6,7 @@ var exportButton
 var nodeSlider
 //var edgeSlider
 var edgeSlider2
-var edgeChangeSlider
+//var edgeChangeSlider
 var selectedEdgeIDs
 //boolean for the history switch
 //var historyIsOn = false
@@ -43,7 +43,7 @@ const init = () => {
     nodeSlider = document.getElementById('nodeSlider')
     //edgeSlider = document.getElementById('edgeSlider')  
     edgeSlider2 = document.getElementById('edgeSlider2')
-    edgeChangeSlider = document.getElementById('edgeChangeSlider')
+    //edgeChangeSlider = document.getElementById('edgeChangeSlider')
     herfindahlVal = document.getElementById('herfindahl')
     nodeCoords = 'default'
     nodeColor = 'default'
@@ -69,7 +69,7 @@ const init = () => {
     setSlider(nodeSlider,_nodeRange,nodeRange)
     //setSlider(edgeSlider,_edgeRange,edgeRange)
     setEdgeRankSlider(edgeSlider2,_edgeCutoff)
-    setEdgeChangeSlider(edgeChangeSlider,dates)
+    //setEdgeChangeSlider(edgeChangeSlider,dates)
     //construct_network()
     draw()
 }
@@ -382,7 +382,7 @@ const setEdgeRankSlider = (sliderID,startValue) => {
     })
 }
 //slider determining which edges will be shown according to percentile rank
-const setEdgeChangeSlider = (sliderID,rangeValues) => {
+/*const setEdgeChangeSlider = (sliderID,rangeValues) => {
     console.log(rangeValues)
     console.log(rangeValues[rangeValues.length-1])
     noUiSlider.create(sliderID, {
@@ -393,7 +393,7 @@ const setEdgeChangeSlider = (sliderID,rangeValues) => {
         max: rangeValues[rangeValues.length-1].dateID
     }
     })
-}
+}*/
 //------EXECUTE AND EVENT LISTENERS------//
 //in index.html
 //init()

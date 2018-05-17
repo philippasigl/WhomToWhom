@@ -91,18 +91,8 @@
 
                         <div class="control-option">
                                 <select class="Select-control" id="comparisonDate" value="init()" onChange="switch_comparisonDate()"></select>
-                                <label for="date">Period for comparison</label>
+                                <label for="comparisonDate">Period for comparison</label>
                         </div>
-
-                        <!--<div class="control-option">
-                            <div id="edgeChangeSlider" class="slider"></div>
-                            <label for="edgeChangeSlider">Period for comparison</label>
-                        </div>
-
-                        <div class="control-option">
-                            <div id="edgeSlider" class="slider"></div>
-                            <label for="edgeSlider">Edge scale</label>
-                        </div>-->
 
                         <div class="control-option">
                             <div id="edgeSlider2" class="slider"></div>
@@ -216,7 +206,7 @@
                         jQuery("#comparisonDate").append('<option value="' + value.dateID + '" selected>' + value.date + '</option>');
                     }
                     else {
-                        jQuery("#date").append('<option value="' + value.dateID + '">' + value.date + '</option>');
+                        jQuery("#comparisonDate").append('<option value="' + value.dateID + '">' + value.date + '</option>');
                     }
                 })
 

@@ -288,7 +288,7 @@ const set_change = () => {
     let edgeSize  
     _edges.map((edge) => {
         let compEdge = edges.find(it => {
-            return it['dateID']==_comparisonDate && it['asset']==edge['asset'] && it['from']==edge['from'] && it['to']==edge['to']
+            return it['dateID']==_comparisonDate && it['region']==edge['region'] && it['asset']==edge['asset'] && it['from']==edge['from'] && it['to']==edge['to']
         })
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 

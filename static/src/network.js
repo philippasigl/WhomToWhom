@@ -283,7 +283,7 @@ const set_change = () => {
     let edgeSize  
     _edges.map((edge) => {
         let compEdge = edges.find(it => {
-            return it['dateID']==_comparisonDate && it['asset']==edge['asset']
+            return it['dateID']==_comparisonDate && it['asset']==edge['asset'] && it['from']==edge['from'] && it['to']==edge['to']
         })
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 
@@ -293,9 +293,7 @@ const set_change = () => {
         else edge['trend'] == 'none'
         console.log("1 ",edge)
         console.log("2 ",compEdge)
-
-        edge.value=edgeSize
-        edge.title=edgeSize
+        edge.change=edgeSize
     })
     var data = {nodes: _nodes, edges: _edges}
     network.setData({nodes: _nodes, edges: _edges})

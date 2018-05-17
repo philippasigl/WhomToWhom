@@ -19,7 +19,6 @@
     <!--<script type="text/javascript" src="../static/file-saver/filesaver.min.js"></script>-->
     <script type="text/javascript" src="../static/canvas-toBlob.js"></script>
     <script type="text/javascript" src="../static/src/utils.js"></script>
-    <script type="text/javascript" src="../static/src/jsonImport.js"></script>
 
     <!--
     <script type="text/javascript" src="../data/nodes.json"></script>
@@ -30,28 +29,7 @@
     <script type="text/javascript" src="../data/categoryKeys.json"></script>
     -->
 <script type="text/javascript">
-  let nodes=[]
-  let edges=[]
-  let dates=[]
-  let sectors=[]
-  let banks=[]
-  let categoryKeys=[]
-  
-  let requestURL = '../data.json'
-  let request = new XMLHttpRequest()
-  request.open('GET', requestURL)
-  request.responseType = 'json'
-  request.send() 
-  request.onload = () => {
-    nodes = request.response.nodes
-    edges = request.response.edges
-    sectors = request.response.sectors
-    banks = request.response.banks
-    categoryKeys = request.response.categoryKeys
-    dates = request.response.dates
-  console.log(banks)
-  }
-  console.log("out",banks)
+
 </script>
 
 <div id="canvas" class="flex-container">
@@ -151,6 +129,26 @@
     </div>
     
     <script type="text/javascript">
+        let nodes=[]
+        let edges=[]
+        let dates=[]
+        let sectors=[]
+        let banks=[]
+        let categoryKeys=[]
+        
+        let requestURL = '../data.json'
+        let request = new XMLHttpRequest()
+        request.open('GET', requestURL)
+        request.responseType = 'json'
+        request.send() 
+        request.onload = () => {
+            nodes = request.response.nodes
+            edges = request.response.edges
+            sectors = request.response.sectors
+            banks = request.response.banks
+            categoryKeys = request.response.categoryKeys
+            dates = request.response.dates
+        
         //dates
         $.each(dates, function(index, value) {
             if (index == dates.length-1) {
@@ -227,7 +225,7 @@
         jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
         jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
         //slider for scales
-        let setSlider = (sliderID,startValues,rangeValues) => {
+        setSlider = (sliderID,startValues,rangeValues) => {
             noUiSlider.create(sliderID, {
             start: startValues,
             range: {
@@ -246,6 +244,7 @@
                 max: [1]
             }
             })
+        }
         }
     </script>
     </div>

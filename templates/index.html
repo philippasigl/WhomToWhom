@@ -32,7 +32,7 @@
 <script type="text/javascript">
   let nodes=[]
   let edges=[]
-  let data=[]
+  let dates=[]
   let sectors=[]
   let banks=[]
   let categoryKeys=[]
@@ -43,13 +43,12 @@
   request.responseType = 'json'
   request.send() 
   request.onload = () => {
-  data = request.response
-  nodes = request.response.nodes
-  edges = request.response.edges
-  sectors = request.response.sectors
-  banks = request.response.banks
-  categoryKeys = request.response.categoryKeys
-  dates = request.response.dates
+    nodes = request.response.nodes
+    edges = request.response.edges
+    sectors = request.response.sectors
+    banks = request.response.banks
+    categoryKeys = request.response.categoryKeys
+    dates = request.response.dates
   console.log(banks)
   }
   console.log("out",banks)

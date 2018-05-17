@@ -67,7 +67,7 @@ const init = () => {
     _outerCirclesRadius = 100
     _innerOuterRadius = 600
     setSlider(nodeSlider,_nodeRange,nodeRange)
-    setSlider(edgeSlider,_edgeRange,edgeRange)
+    //setSlider(edgeSlider,_edgeRange,edgeRange)
     setEdgeRankSlider(edgeSlider2,_edgeCutoff)
     setEdgeChangeSlider(edgeChangeSlider,dates)
     //construct_network()

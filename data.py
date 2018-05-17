@@ -141,10 +141,12 @@ def set_sectors(nodes):
     sectors=[]
     unique=[]
     for node in nodes:
+        print(node['sector'])
         if node['sector'] not in unique:
             sectors.append({'sector': node['sector']})
         unique.append(node['sector'])
     sectors.append({'sector': 'all'})
+    print(sectors)
     return sectors
 
 def set_names(nodes):

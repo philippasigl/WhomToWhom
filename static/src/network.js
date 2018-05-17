@@ -279,7 +279,8 @@ const select_edgeSizeKey = () => {
 }
 
 const switch_comparisonDate = () => {
-    _comparisonDate = document.getElementById('comparisonDate').value.dateID
+    _comparisonDate = document.getElementById('comparisonDate').value
+    console.log("date", _comparisonDate)
     draw()
 }
 

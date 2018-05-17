@@ -50,12 +50,12 @@
 
                     <div class="control-option">
                         <select class="Select-control" id="region" value="init()" onChange="switch_region()"></select>
-                        <label for="date">Region</label>
+                        <label for="region">Region</label>
                     </div>
 
                     <div class="control-option">
                         <select class="Select-control" id="asset" value="init()" onChange="switch_asset()"></select>
-                        <label for="date">Asset</label>
+                        <label for="asset">Asset</label>
                     </div>    
                 </div>
 
@@ -166,7 +166,7 @@
 
         //region
         $.each(region, function(index, value) {
-            if (index == 'Euro Area') {
+            if (value == 'Euro Area') {
                 jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
             }
             else {
@@ -175,7 +175,7 @@
         })
         //asset
         $.each(assets, function(index, value) {
-            if (index == 'total') {
+            if (value == 'total') {
                 jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
             }
             else {
@@ -241,7 +241,7 @@
             }
             })
         }
-        
+
     </script>
     </div>
 </div>

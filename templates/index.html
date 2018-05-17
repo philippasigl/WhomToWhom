@@ -32,12 +32,19 @@
 <script type="text/javascript">
   let nodes
   let edges
-  let dates=[]
+  //let dates=[]
   let sectors
   let banks
   let categoryKeys
-  jsonImport('../data/dates.json',dates) 
-  console.log("dates",dates)  
+  
+  let requestURL = '../data/dates.json'
+  let request = new XMLHttpRequest()
+  request.open('GET', requestURL)
+  request.responseType = 'json'
+  request.send() 
+  let dates = request.response['dates']
+  console.log("re",request.response)
+  console.log("dates",dates) 
 </script>
 
 <div id="canvas" class="flex-container">

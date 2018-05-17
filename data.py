@@ -237,8 +237,13 @@ def save_data():
     dates = set_dates(nodes)
     sectors = set_sectors(nodes)
     banks = set_names(nodes)
-    #data = json.dumps({'edges':edges,'nodes':nodes, 'categoryKeys': categoryKeys, 'dates':dates, 'sectors':sectors,'banks':banks})
+    data = {"edges": edges,"nodes":nodes, "categoryKeys": categoryKeys, "dates": dates, "sectors":sectors,"banks":banks}
 
+    filename = 'data.json'
+    with open (filename,'w') as file:
+        json.dump(data,file)
+
+    '''
     filename = 'edges.json'
     filepath = os.path.join(DIR, filename)
     with open (filepath,'w') as file:
@@ -268,7 +273,7 @@ def save_data():
     filepath = os.path.join(DIR, filename)
     with open (filepath,'w') as file:
         json.dump(categoryKeys,file)
-
+    '''
 if __name__ == '__main__':
    save_data()
    

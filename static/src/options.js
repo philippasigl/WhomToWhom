@@ -208,8 +208,6 @@ const nodeColorsBySector = () => {
     var cols = {}
     sectors.map((sector, idx) => cols[sector.sector]= colors[idx]) 
     _nodes.map((node) => { node.color = {background: cols[node.sector]}; return node})
-    console.log(cols)
-    console.log(_nodes)
     network.setData({nodes: _nodes, edges: _edges})
 }
 
@@ -278,14 +276,14 @@ const herfindahl = () => {
   let sumByNode = uniqueNodes.map((node) => {
     let total=0
     _edges.map((edge) => { if (edge.from==node || edge.to==node) total=total+edge.absValue})
-    return total.toFixed(2)
+    return total
   })
   let totalSum=0
   sumByNode.map((item) => {totalSum=totalSum+item})
   let shares = sumByNode.map((item) => { return item/totalSum})
   let herf=0
   shares.map((share) => herf=herf+share*share)
-  
-  return herf.toPrecision(4)*100
+  let result = herf.toPrecision(4)*100
+  return result.toFixed(2)
  // _nodes((node) => {if (node)})
 }

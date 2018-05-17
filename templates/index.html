@@ -37,12 +37,12 @@
   let banks
   let categoryKeys
   
-  let requestURL = '../data/dates.json'
+  let requestURL = '../data.json'
   let request = new XMLHttpRequest()
   request.open('GET', requestURL)
   request.responseType = 'json'
   request.send() 
-  let dates = request.response['dates']
+  let data = request.response
   console.log("re",request.response)
   console.log("dates",dates) 
 </script>

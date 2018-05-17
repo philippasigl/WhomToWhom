@@ -278,6 +278,11 @@ const select_edgeSizeKey = () => {
     network.setData({nodes: _nodes, edges: _edges})
 }
 
+const switch_comparisonDate = () => {
+    _comparisonDate = document.getElementById('comparisonDate').value.dateID
+    draw()
+}
+
 const set_change = () => {
     console.log(edges)
     let edgeSize  
@@ -288,8 +293,8 @@ const set_change = () => {
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 
         if (edgeSize > 0) edge['trend'] = 'increased'
-        if (edgeSize == 0) edge['trend'] = 'unchanged'
-        if (edgeSize < 0) edge['trend'] = 'decreased' 
+        else if (edgeSize == 0) edge['trend'] = 'unchanged'
+        else if (edgeSize < 0) edge['trend'] = 'decreased' 
         else edge['trend'] = 'none'
         console.log("1 ",edge)
         console.log("2 ",compEdge)
@@ -309,12 +314,13 @@ const set_edgeRange = () => edgeSlider.noUiSlider.on('change', (values) => {
     _edgeRange[1]=parseInt(values[1])
     draw()
 })
-*/
+
 
 const set_edgeChangeValue = () => edgeChangeSlider.noUiSlider.on('change',(values) => {
     _comparisonDate=parseFloat(values[0])
     draw()
 })
+*/
 
 const set_edgeCutoff = () => edgeSlider2.noUiSlider.on('change', (values) => {
     _edgeCutoff = parseFloat(values[0])

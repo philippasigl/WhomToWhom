@@ -90,11 +90,16 @@
                         </div>
 
                         <div class="control-option">
-                            <div id="edgeChangeSlider" class="slider"></div>
-                            <label for="edgeChangeSlider">Periods for comparison</label>
+                                <select class="Select-control" id="comparisonDate" value="init()" onChange="switch_comparisonDate()"></select>
+                                <label for="date">Period for comparison</label>
                         </div>
 
                         <!--<div class="control-option">
+                            <div id="edgeChangeSlider" class="slider"></div>
+                            <label for="edgeChangeSlider">Period for comparison</label>
+                        </div>
+
+                        <div class="control-option">
                             <div id="edgeSlider" class="slider"></div>
                             <label for="edgeSlider">Edge scale</label>
                         </div>-->
@@ -205,6 +210,16 @@
                 jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
                 jQuery("#edgeSize").append('<option value="' + 'change' + '">' + 'change' + '</option>')
             
+                //edge comparison date
+                 $.each(dates, function(index, value) {
+                    if (index == dates.length-1) {
+                        jQuery("#comparisonDate").append('<option value="' + value.dateID + '" selected>' + value.date + '</option>');
+                    }
+                    else {
+                        jQuery("#date").append('<option value="' + value.dateID + '">' + value.date + '</option>');
+                    }
+                })
+
                 //bank name
                 jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
                 jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
@@ -215,7 +230,7 @@
                 set_nodeRange()
                 //UNUSED since ineffective and known scale
                 //set_edgeRange() 
-                set_edgeChangeValue()   
+                //set_edgeChangeValue()   
                 set_edgeCutoff()
             }
         </script>

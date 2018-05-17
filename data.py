@@ -214,77 +214,86 @@ def transform_edges(edges):
             idx+=1
     return transformedEdges
 
-def trend_edges(edges,times):
+#UNUSED
+def trend_edges(edges,times,regions,assets):
+
     #find first Period
     firstPeriod=times[0]['dateID']
     for row in times:
         if row['dateID']<firstPeriod:
             firstPeriod=row['dateID']
-    
-    for row1 in edges: 
-        comparators = [row for row in edges if row1['from'] == row['from'] and row1['to'] == row['to']]
-        sortedComps = sorted(comparators, key=lambda k: k['dateID']) 
-        startingPoint = sortedComps.index(row1)
-        #prior element first, then current element
-        currentComps = sortedComps[startingPoint-1:startingPoint+1]
-        #to calculate 1 and 5 year average
-        oneYearComp = -1
-        twoYearComp = -1
-        if startingPoint-3>0:
-            oneYearComp=int(sortedComps[startingPoint]['absValue']-sortedComps[startingPoint-4]['absValue'])  
-        if startingPoint -7 > 0:
-            twoYearComp=int(sortedComps[startingPoint]['absValue']-sortedComps[startingPoint-8]['absValue'])
-        #for first period, set unchanged values and no changes
-        if row1['dateID']==firstPeriod:
-            row1['trend']='unchanged'
-            row1['trendValue']=0
-        elif len(currentComps)==0:
-            row1['trend']= 'increased'
-            row1['trendValue']=0
-        #if there was no connection before, the value was most likely 0. Hence this would represent an increase
-        #[-1] is the last element
-        elif len(currentComps)==1:
-            row1['trend']= 'increased'
-            row1['trendValue']=currentComps[0]['absValue']
-        #unchanged
-        elif currentComps[-2]['absValue']==currentComps[-1]['absValue']:
-            row1['trend']='unchanged'
-            row1['trendValue']=0
-        #increase
-        elif currentComps[-2]['absValue']>currentComps[-1]['absValue']:
-            row1['trend']= 'increased'
-            row1['trendValue']=int(currentComps[-2]['absValue']-currentComps[-1]['absValue'])
-        #decline
-        elif sortedComps[-2]['absValue']<sortedComps[-1]['absValue']:
-            row1['trend']= 'decreased'
-            row1['trendValue']=int(currentComps[-1]['absValue']-currentComps[-2]['absValue'])
-        #one year comparison
-        if oneYearComp == -1:
-            row1['oneYearComp'] = 0
-            row1['oneYearTrend'] = 'increased'
-        elif oneYearComp > 0:
-            row1['oneYearTrend']='increased'
-            row1['oneYearComp']=(oneYearComp)
-        elif oneYearComp == 0:
-            row1['oneYearTrend']='unchanged'
-            row1['oneYearComp']=(oneYearComp)
-        elif oneYearComp < 0:
-            row1['oneYearTrend']='decreased'
-            row1['oneYearComp']=(-oneYearComp)
-        #two year
-        if twoYearComp == -1:
-            row1['twoYearComp'] = 0
-            row1['twoYearTrend'] = 'increased'
-        elif twoYearComp > 0:
-            row1['twoYearTrend']='increased'
-            row1['twoYearComp']=(twoYearComp)
-        elif twoYearComp == 0:
-            row1['twoYearTrend']='unchanged'
-            row1['twoYearComp']=(twoYearComp)
-        elif twoYearComp < 0:
-            row1['twoYearTrend']='decreased'
-            row1['twoYearComp']=(-twoYearComp)
-    
+
+    #loop through all regions and all assets        
+    for region in regions:
+        for asset in assets:
+            selectedEdges = [row for row in edges if row['region']==region['region'] and row['asset']==asset['asset']]
+
+            #go through each edge in the subset
+            for row1 in selectedEdges: 
+                comparators = [row for row in edges if row1['from'] == row['from'] and row1['to'] == row['to']]
+                sortedComps = sorted(comparators, key=lambda k: k['dateID']) 
+                startingPoint = sortedComps.index(row1)
+                #prior element first, then current element
+                currentComps = sortedComps[startingPoint-1:startingPoint+1]
+                #to calculate 1 and 5 year average
+                oneYearComp = -1
+                twoYearComp = -1
+                if startingPoint-3>0:
+                    oneYearComp=int(sortedComps[startingPoint]['absValue']-sortedComps[startingPoint-4]['absValue'])  
+                if startingPoint -7 > 0:
+                    twoYearComp=int(sortedComps[startingPoint]['absValue']-sortedComps[startingPoint-8]['absValue'])
+                #for first period, set unchanged values and no changes
+                if row1['dateID']==firstPeriod:
+                    row1['trend']='unchanged'
+                    row1['trendValue']=0
+                elif len(currentComps)==0:
+                    row1['trend']= 'increased'
+                    row1['trendValue']=0
+                #if there was no connection before, the value was most likely 0. Hence this would represent an increase
+                #[-1] is the last element
+                elif len(currentComps)==1:
+                    row1['trend']= 'increased'
+                    row1['trendValue']=currentComps[0]['absValue']
+                #unchanged
+                elif currentComps[-2]['absValue']==currentComps[-1]['absValue']:
+                    row1['trend']='unchanged'
+                    row1['trendValue']=0
+                #increase
+                elif currentComps[-2]['absValue']>currentComps[-1]['absValue']:
+                    row1['trend']= 'increased'
+                    row1['trendValue']=int(currentComps[-2]['absValue']-currentComps[-1]['absValue'])
+                #decline
+                elif currentComps[-2]['absValue']<currentComps[-1]['absValue']:
+                    row1['trend']= 'decreased'
+                    row1['trendValue']=int(currentComps[-1]['absValue']-currentComps[-2]['absValue'])
+                #one year comparison
+                if oneYearComp == -1:
+                    row1['oneYearComp'] = 0
+                    row1['oneYearTrend'] = 'increased'
+                elif oneYearComp > 0:
+                    row1['oneYearTrend']='increased'
+                    row1['oneYearComp']=(oneYearComp)
+                elif oneYearComp == 0:
+                    row1['oneYearTrend']='unchanged'
+                    row1['oneYearComp']=(oneYearComp)
+                elif oneYearComp < 0:
+                    row1['oneYearTrend']='decreased'
+                    row1['oneYearComp']=(-oneYearComp)
+                #two year
+                if twoYearComp == -1:
+                    row1['twoYearComp'] = 0
+                    row1['twoYearTrend'] = 'increased'
+                elif twoYearComp > 0:
+                    row1['twoYearTrend']='increased'
+                    row1['twoYearComp']=(twoYearComp)
+                elif twoYearComp == 0:
+                    row1['twoYearTrend']='unchanged'
+                    row1['twoYearComp']=(twoYearComp)
+                elif twoYearComp < 0:
+                    row1['twoYearTrend']='decreased'
+                    row1['twoYearComp']=(-twoYearComp)
+                if row1['trend']!='increased' and row1['trend']!='decreased' and row1['trend']!='unchanged':
+                    print(row1)
     return
 
 def upload_files():
@@ -311,8 +320,6 @@ def upload_files():
 
     edges=transform_edges(edges)
     nodes=transform_nodes(nodes,set_keys())
-    dates = set_dates(nodes)
-    trend_edges(edges,dates)
     
     #OUTPUT CHECK
     for row in edges[1:10]:

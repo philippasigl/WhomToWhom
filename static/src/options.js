@@ -123,70 +123,6 @@ const circleCoord = (selNodes,r,x0,y0) => {
     return selNodes
 }
 
-//core periphery structure
-const corePeripheryCoord = (_centre) => {
-  let peripheryNodes=[]
-  let centralNodes=[]
-  //without core
-  if (typeof _centre != 'undefined') {
-  let centre = _centre
-  centralNodes = _nodes.filter((node) => node.sector == centre)
-  centralNodes = circleCoord(centralNodes,_innerCircleRadius,0,0)
-
-  //peripheral nodes
-  peripheryNodes = _nodes.filter((node) => node.sector != centre)
-  }
-  else {
-    peripheryNodes = _nodes
-  }
-
-  let peripherySectors = sectors.filter((sector) => sector.sector != _centre)
-  let peripheryCentres = setPeripheryCentres(peripherySectors.length,_innerOuterRadius)
-  peripherySectors.map((sec,idx) => {
-    let secNodes = peripheryNodes.filter((node) => node.sector == sec.sector)
-    let x0=peripheryCentres[idx].x
-    let y0=peripheryCentres[idx].y
-    secNodes = circleCoord(secNodes,_outerCirclesRadius,x0,y0)
-    return secNodes
-  })
-
-  //peripheryNodes = circleCoord(peripheryNodes,500,0,0)
-  return _nodes = centralNodes.concat(peripheryNodes)
-
-}
-
-//selects which sector is at the centre of the core-periphery visualisation
-//selection is made based on max avg(selected categoryKey)
-const setCoreSector = (_categoryKey) => {
-  //find sector averages
-  let sectorAvgs=[]
-  sectors.slice(0,-1).map((sector) => {
-    let selNodes = _nodes.filter((node) => node.sector == sector.sector)
-    let sum=0
-    selNodes.map((node) => {
-      sum+=node[_categoryKey]
-    })
-    sectorAvgs.push(sum/selNodes.length)
-    })
-  //select maximum value and return corresponding sector
-  let idxMax = sectorAvgs.indexOf(Math.max(...sectorAvgs))
-  let coreSector = sectors[idxMax].sector
-  return coreSector
-}
-
-const setPeripheryCentres = (countCentres,outerCircleSize) => {
-  let coord=[]
-  let x0=0
-  let y0=0
-      for(var i = 0; i < countCentres; i++) {
-          var x= x0 + outerCircleSize * Math.cos(2 * Math.PI * i / countCentres)
-          var y = y0 + outerCircleSize * Math.sin(2 * Math.PI * i / countCentres)
-          //var key = banks[i+j-1].id
-          coord.push({x: x, y: y})
-      }
-    return coord
-}
-
 const hideZeroValues = () => {
   //_edges.map((edge) => {if (edge.value==0) edge.hidden=true; else edge.hidden=false;})
   _nodes.map((node) => {if (node.value==0) node.hidden=true; else node.hidden=false;})
@@ -232,11 +168,9 @@ const edgeColorsByTrend = () => {
     let change = 'none'
     if (edgeSizeKey == 'absolute') change='trend'
     if (edgeSizeKey == 'change to last period') change='trend'
-    if (edgeSizeKey == 'change to prior year') change='oneYearTrend'
-    if (edgeSizeKey == 'change to two years prior') change='twoYearTrend'
-    console.log(change)
+    
     _edges.map((edge) => {edge.color = {color: COLORS[edge[change]], opacity: 0.2, highlight: COLORS[edge[change]]}; return edge})
-    console.log(_edges)
+
     network.setData({nodes: _nodes, edges: _edges})
 }
 

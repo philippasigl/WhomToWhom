@@ -90,9 +90,14 @@
                         </div>
 
                         <div class="control-option">
+                            <div id="edgeChangeSlider" class="slider"></div>
+                            <label for="edgeChangeSlider">Periods for comparison</label>
+                        </div>
+
+                        <!--<div class="control-option">
                             <div id="edgeSlider" class="slider"></div>
                             <label for="edgeSlider">Edge scale</label>
-                        </div>
+                        </div>-->
 
                         <div class="control-option">
                             <div id="edgeSlider2" class="slider"></div>
@@ -191,14 +196,15 @@
                         jQuery("#nodeSize").append('<option value="' + value + '">' + value + '</option>')
                     }
                 })
+
                 //node color
                 jQuery("#nodeColor").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
                 jQuery("#nodeColor").append('<option value="' + 'none' + '">' + 'none' + '</option>')
+
                 //edge size
                 jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
-                jQuery("#edgeSize").append('<option value="' + 'change to last period' + '">' + 'change to last period' + '</option>')
-                jQuery("#edgeSize").append('<option value="' + 'change to prior year' + '">' + 'change to prior year' + '</option>')
-                jQuery("#edgeSize").append('<option value="' + 'change to two years prior' + '">' + 'change to two years prior' + '</option>')
+                jQuery("#edgeSize").append('<option value="' + 'change' + '">' + 'change' + '</option>')
+            
                 //bank name
                 jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
                 jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
@@ -207,7 +213,9 @@
                 //------EXECUTE AND EVENT LISTENERS------//
                 init()
                 set_nodeRange()
-                set_edgeRange()    
+                //UNUSED since ineffective and known scale
+                //set_edgeRange() 
+                set_edgeChange()   
                 set_edgeCutoff()
             }
         </script>

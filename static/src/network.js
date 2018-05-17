@@ -4,8 +4,9 @@ var network
 var container
 var exportButton
 var nodeSlider
-var edgeSlider
+//var edgeSlider
 var edgeSlider2
+var edgeChangeSlider
 var selectedEdgeIDs
 //boolean for the history switch
 //var historyIsOn = false
@@ -29,6 +30,7 @@ var _edges
 var _options
 var _nodeRange
 var _edgeRange
+var _comparisonDate
 var _edgeCutoff
 var _innerCircleRadius
 var _outerCirclesRadius
@@ -39,8 +41,9 @@ const init = () => {
     container = document.getElementById('network')
     exportButton = document.getElementById('export_button')
     nodeSlider = document.getElementById('nodeSlider')
-    edgeSlider = document.getElementById('edgeSlider')  
+    //edgeSlider = document.getElementById('edgeSlider')  
     edgeSlider2 = document.getElementById('edgeSlider2')
+    edgeChangeSlider = document.getElementById('edgeChangeSlider')
     herfindahlVal = document.getElementById('herfindahl')
     nodeCoords = 'default'
     nodeColor = 'default'
@@ -49,13 +52,14 @@ const init = () => {
     edgeSizeKey = 'absolute'
     edgeColorIsOn = false
     edgeColorLargestIsOn = false
-    console.log("dates ",dates)
     date = dates[dates.length-1].dateID
     asset = 'total'
     region = 'Euro Area'
     _sector = 'all'
     _nodeRange = [20,200]
     _edgeRange = [0.3,30]
+    //initialised to last and second to last value
+    _comparisonDate = dates[dates.length-1].dateID
     let edgeRange = [0.3,30]
     let nodeRange = [20,200]
     _edgeCutoff = 0.1
@@ -65,11 +69,13 @@ const init = () => {
     setSlider(nodeSlider,_nodeRange,nodeRange)
     setSlider(edgeSlider,_edgeRange,edgeRange)
     setEdgeRankSlider(edgeSlider2,_edgeCutoff)
+    setEdgeChangeSlider(edgeChangeSlider,dates)
     //construct_network()
     draw()
 }
 
 const draw = () => { 
+    console.log("comp date",_comparisonDate)
     //if (typeof date !== 'undefined')  {
     //   document.getElementById("hist_network_select").checked = false;
     //   historyIsOn = false;
@@ -90,6 +96,8 @@ const draw = () => {
     //set network structure
     //select_nodeCoord()
     //if (historyIsOn) set_history()
+    //set change
+    set_change()
     //set colors
     select_nodeColor()
     if (edgeColorIsOn) set_edge_color()
@@ -262,9 +270,7 @@ const select_edgeSizeKey = () => {
     let edgeSize  
     _edges.map((edge) => {
         if (edgeSizeKey == 'absolute') edgeSize = edge['absValue']
-        else if (edgeSizeKey == 'change to last period') edgeSize = edge['trendValue']
-        else if (edgeSizeKey == 'change to prior year') edgeSize = edge['oneYearComp']
-        else edgeSize = edge['twoYearComp']
+        else edgeSize = edge['change'] 
         edge.value=edgeSize
         edge.title=edgeSize
     })
@@ -272,9 +278,37 @@ const select_edgeSizeKey = () => {
     network.setData({nodes: _nodes, edges: _edges})
 }
 
+const set_change = () => {
+    let edgeSize  
+    _edges.map((edge) => {
+        let compEdge = _edges.find((it) => {return it['dateID']==_comparisonDate && it['from']==edge['from'] && it['to']==edge['to']})
+        compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
+
+        if (edgeSize > 0) edge['trend'] == 'increased'
+        if (edgeSize == 0) edge['trend'] == 'unchanged'
+        if (edgeSize < 0) edge['trend'] == 'decreased' 
+        else edge['trend'] == 'none'
+        console.log("1 ",edge)
+        console.log("2 ",compEdge)
+
+        edge.value=edgeSize
+        edge.title=edgeSize
+    })
+    var data = {nodes: _nodes, edges: _edges}
+    network.setData({nodes: _nodes, edges: _edges})
+}
+
+//UNUSED since scale roughly know and not very effective
+/*
 const set_edgeRange = () => edgeSlider.noUiSlider.on('change', (values) => {
     _edgeRange[0]=parseInt(values[0])
     _edgeRange[1]=parseInt(values[1])
+    draw()
+})
+*/
+
+const set_edgeChangeValue = () => edgeChangeSlider.noUiSlider.on('change',(values) => {
+    _comparisonDate=parseFloat(values[0])
     draw()
 })
 
@@ -337,7 +371,16 @@ const setEdgeRankSlider = (sliderID,startValue) => {
     }
     })
 }
-
+//slider determining which edges will be shown according to percentile rank
+const setEdgeChangeSlider = (sliderID,rangeValues) => {
+    noUiSlider.create(sliderID, {
+    start: rangeValues[rangeValues.length-2].date,
+    range: {
+        min: rangeValues[0].date,
+        max: rangeValues[rangeValues.length-1].date
+    }
+    })
+}
 //------EXECUTE AND EVENT LISTENERS------//
 //in index.html
 //init()

@@ -283,7 +283,7 @@ const set_change = () => {
     let edgeSize  
     _edges.map((edge) => {
         let compEdge = edges.find(it => {
-            return it['dateID']==_comparisonDate
+            return it['dateID']==_comparisonDate && it['asset']==edge['asset']
         })
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 
@@ -380,7 +380,7 @@ const setEdgeChangeSlider = (sliderID,rangeValues) => {
     console.log(rangeValues[rangeValues.length-1])
     noUiSlider.create(sliderID, {
     start: rangeValues[rangeValues.length-2].dateID,
-    step: 4,
+    step: 3,
     range: {
         min: rangeValues[0].dateID,
         max: rangeValues[rangeValues.length-1].dateID

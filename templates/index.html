@@ -162,16 +162,9 @@
             dates = request.response.dates
             regions = request.response.regions
             assets = request.response.assets 
-            console.log("dates",assets)
 
-        //sectors
-        $.each(sectors, function(index, value) {
-            jQuery("#sectors").append(value.sector);
-        })
         //region
         $.each(regions, function(index, value) {
-            console.log("region")
-            console.log(value)
             if (value.region == 'Euro Area') {
                 jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
             }
@@ -181,10 +174,7 @@
         })
         //asset
         $.each(assets, function(index, value) {
-            console.log("asset")
-            console.log(value)
             if (value.asset == 'total') {
-                console.log("default")
                 jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
             }
             else {

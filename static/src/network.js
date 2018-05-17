@@ -287,16 +287,16 @@ const set_change = () => {
         })
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 
-        if (edgeSize > 0) edge['trend'] == 'increased'
-        if (edgeSize == 0) edge['trend'] == 'unchanged'
-        if (edgeSize < 0) edge['trend'] == 'decreased' 
-        else edge['trend'] == 'none'
+        if (edgeSize > 0) edge['trend'] = 'increased'
+        if (edgeSize == 0) edge['trend'] = 'unchanged'
+        if (edgeSize < 0) edge['trend'] = 'decreased' 
+        else edge['trend'] = 'none'
         console.log("1 ",edge)
         console.log("2 ",compEdge)
         //negative edgeSizes inverted to ensure scaling works
         if (edgeSize < 0) edgeSize = (-1)*edgeSize
-        
-        edge.change=edgeSize
+
+        edge['change']=edgeSize
     })
     var data = {nodes: _nodes, edges: _edges}
     network.setData({nodes: _nodes, edges: _edges})

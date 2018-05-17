@@ -49,6 +49,7 @@ const init = () => {
     edgeSizeKey = 'absolute'
     edgeColorIsOn = false
     edgeColorLargestIsOn = false
+    console.log("dates ",dates)
     date = dates[dates.length-1].dateID
     asset = 'total'
     region = 'Euro Area'

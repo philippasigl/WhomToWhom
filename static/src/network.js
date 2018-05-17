@@ -281,7 +281,7 @@ const select_edgeSizeKey = () => {
 const set_change = () => {
     let edgeSize  
     _edges.map((edge) => {
-        let compEdge = _edges.find(it => it['dateID']==_comparisonDate && it['from']==edge['from'] && it['to']==edge['to'])
+        let compEdge = _edges.find(it => {return it['dateID']==_comparisonDate && it['from']==edge['from'] && it['to']==edge['to']})
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']
 
         if (edgeSize > 0) edge['trend'] == 'increased'

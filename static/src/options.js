@@ -207,8 +207,9 @@ const nodeColorsBySector = () => {
     }
     var cols = {}
     sectors.map((sector, idx) => cols[sector.sector]= colors[idx]) 
-    console.log("sec",sectors)
     _nodes.map((node) => { node.color = {background: cols[node.sector]}; return node})
+    console.log(cols)
+    console.log(_nodes)
     network.setData({nodes: _nodes, edges: _edges})
 }
 

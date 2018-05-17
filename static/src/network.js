@@ -49,6 +49,8 @@ const init = () => {
     edgeColorLargestIsOn = false
     coreSector = sectors[0].sector
     date = dates[dates.length-1].dateID
+    asset = 'total'
+    region = 'Euro Area'
     _sector = 'all'
     _nodeRange = [20,200]
     _edgeRange = [0.3,30]
@@ -243,7 +245,7 @@ const switch_nodeColor = () => {
 
 const select_nodeColor = () => {
     if (nodeColor == 'default') nodeColorsBySector()
-    else if (nodeColor == 'custom') nodeColorsCustom()
+    //else if (nodeColor == 'custom') nodeColorsCustom()
     else nodeColorsUniform()
     network.setData({nodes: _nodes, edges: _edges})
 }

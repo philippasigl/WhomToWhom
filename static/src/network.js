@@ -8,8 +8,6 @@ var nodeSlider
 var edgeSlider2
 //var edgeChangeSlider
 var selectedEdgeIDs
-//boolean for the history switch
-//var historyIsOn = false
 var nodeCoords
 var nodeColor
 var edgeColorIsOn
@@ -17,9 +15,6 @@ var edgeColorLargestIsOn
 var nodeName
 var nodeSizeKey
 var edgeSizeKey
-var coreSector
-//saving the non historical positions, so switch can be turned off
-//var nohist_network
 var date
 var region
 var asset
@@ -32,9 +27,6 @@ var _nodeRange
 var _edgeRange
 var _comparisonDate
 var _edgeCutoff
-var _innerCircleRadius
-var _outerCirclesRadius
-var _innerOuterRadius
 //var date
 
 const init = () => {
@@ -63,41 +55,28 @@ const init = () => {
     let edgeRange = [0.3,30]
     let nodeRange = [20,200]
     _edgeCutoff = 0.1
-    _innerCircleRadius = 400
-    _outerCirclesRadius = 100
-    _innerOuterRadius = 600
     setSlider(nodeSlider,_nodeRange,nodeRange)
-    //setSlider(edgeSlider,_edgeRange,edgeRange)
     setEdgeRankSlider(edgeSlider2,_edgeCutoff)
-    //setEdgeChangeSlider(edgeChangeSlider,dates)
-    //construct_network()
+
     draw()
 }
 
 const draw = () => { 
-    console.log("comp date",_comparisonDate)
-    //if (typeof date !== 'undefined')  {
-    //   document.getElementById("hist_network_select").checked = false;
-    //   historyIsOn = false;
-    //}
-   
     //subset nodes and edges by date; required to prevent duplicate id error
     var data = select_data()
 
-    //set minimum scale for nodes
-    //_nodeRange[0] = _nodeRank
     //options are defined in options.js 
     _options = setOptions()
-    //set levels
+
+    //set levels (network is hierarchical from left to right)
     set_levels()
+
     //draw current network
     network = new vis.Network(container, data, _options)
 
-    //set network structure
-    //select_nodeCoord()
-    //if (historyIsOn) set_history()
-    //set change
+    //set change in edges for given reference period
     set_change()
+
     //set colors
     select_nodeColor()
     if (edgeColorIsOn) set_edge_color()
@@ -107,11 +86,14 @@ const draw = () => {
     
     //set node labels
     select_nodeName()
+
     //set category for node and edge sizes
     select_nodeSizeKey()
     select_edgeSizeKey()
+
     //set tooltips
     set_tooltips()
+
     //calculate the relative size for the edges
     edgeRank()
     
@@ -280,12 +262,10 @@ const select_edgeSizeKey = () => {
 
 const switch_comparisonDate = () => {
     _comparisonDate = document.getElementById('comparisonDate').value
-    console.log("date", _comparisonDate)
     draw()
 }
 
 const set_change = () => {
-    console.log(edges)
     let edgeSize  
     _edges.map((edge) => {
         let compEdge = edges.find(it => {
@@ -297,8 +277,6 @@ const set_change = () => {
         else if (edgeSize == 0) edge['trend'] = 'unchanged'
         else if (edgeSize < 0) edge['trend'] = 'decreased' 
         else edge['trend'] = 'none'
-        console.log("1 ",edge)
-        console.log("2 ",compEdge)
         //negative edgeSizes inverted to ensure scaling works
         if (edgeSize < 0) edgeSize = (-1)*edgeSize
 
@@ -307,21 +285,6 @@ const set_change = () => {
     var data = {nodes: _nodes, edges: _edges}
     network.setData({nodes: _nodes, edges: _edges})
 }
-
-//UNUSED since scale roughly know and not very effective
-/*
-const set_edgeRange = () => edgeSlider.noUiSlider.on('change', (values) => {
-    _edgeRange[0]=parseInt(values[0])
-    _edgeRange[1]=parseInt(values[1])
-    draw()
-})
-
-
-const set_edgeChangeValue = () => edgeChangeSlider.noUiSlider.on('change',(values) => {
-    _comparisonDate=parseFloat(values[0])
-    draw()
-})
-*/
 
 const set_edgeCutoff = () => edgeSlider2.noUiSlider.on('change', (values) => {
     _edgeCutoff = parseFloat(values[0])
@@ -360,6 +323,7 @@ const set_edge_color = () => {
 const unset_edge_color = () => {
     edgeColorsUniform()
 }
+
 //------SLIDERS--------------------------//
 //slider for scales
 const setSlider = (sliderID,startValues,rangeValues) => {
@@ -382,103 +346,9 @@ const setEdgeRankSlider = (sliderID,startValue) => {
     }
     })
 }
-//slider determining which edges will be shown according to percentile rank
-/*const setEdgeChangeSlider = (sliderID,rangeValues) => {
-    console.log(rangeValues)
-    console.log(rangeValues[rangeValues.length-1])
-    noUiSlider.create(sliderID, {
-    start: rangeValues[rangeValues.length-2].dateID,
-    step: 3,
-    range: {
-        min: rangeValues[0].dateID,
-        max: rangeValues[rangeValues.length-1].dateID
-    }
-    })
-}*/
-//------EXECUTE AND EVENT LISTENERS------//
-//in index.html
-//init()
-//set_nodeRange()
-//set_edgeRange()    
-//set_edgeCutoff()
+
 //------CURRENTLY UNUSED------//
 /*
-exportNetwork = () => {
-    var nodes = objectToArray(network.getPositions())
-    str = (JSON.stringify(nodes))
-    saveNetwork(str)
-}
-
-switch_history = () => {
-    if (historyIsOn) {
-        historyIsOn = false;
-        unset_history();
-    }
-    else {
-        historyIsOn = true;
-        set_history()
-    }
-    draw()
-}
-
-set_history = () => {
-    nohist_network = network.getPositions();
-    var keys = network.body.nodeIndices
-    //to ensure nodes are not rearranged
-    network.physics.stabilized = false
-    
-    //set nodes and edges to respective values
-    keys.map((key,idx) => {
-        network.body.nodes[key].x = hist_network[idx].x;
-        network.body.nodes[key].y = hist_network[idx].y;
-    })
-}
-
-unset_history = () => {
-    var keys = network.body.nodeIndices
-    //to ensure nodes are not rearranged
-    network.physics.stabilized = false
-    //set nodes and edges to respective values
-    keys.map((key,idx) => {
-        network.body.nodes[key].x = nohist_network[key].x;
-        network.body.nodes[key].y = nohist_network[key].y;
-    })    
-}
-
-saveNetwork = (exportValue) => { 
-    fetch('http://127.0.0.1:5000/save', {
-    method: 'POST',
-    headers: {
-    'Accept': 'application/json',
-    'Content-Type': 'application/json',
-    },
-    body: exportValue
-    })
-}
-
-getBase64Image = () => {
-    canvas = document.getElementsByTagName('canvas')
-    dataURL = canvas[0].toDataURL('image/png',0.5)
-    return dataURL.replace(/^data:image\/(png);base64,/, "")
-}
-
-//currently unused; sends the image back to the server and saves it in the temp file
-exportImage = () => {
-    let imgData = JSON.stringify(getBase64Image())
-    //console.log("img",imgData)
-    fetch('http://127.0.0.1:5000/save', {
-        method: 'POST',
-        headers: {
-        'Accept': 'application/json',
-        'Content-Type': 'application/json',
-        },
-        body: imgData
-        }).then((response) => {
-            if (response.ok) { return response}
-            throw new Error('Network response was not ok.');
-        })
-}
-
 objectToArray = (obj) => {
     var arr = []
     Object.keys(obj).map((key) => {

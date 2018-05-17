@@ -27,11 +27,6 @@
         <div id="controls" class="flex-item">
                 <div class="option-list">
 
-                    <!--<div class="control-option">
-                        <input id="hist_network_select" type="checkBox" class="checkbox" onclick="switch_history()"></input>
-                        <label for="hist_network_select">Fix to saved positions</label>
-                    </div>-->
-                
                     <div class="flex-item" id="control-section">
                         <p>Network</p>
                         <div class="control-option">
@@ -113,12 +108,6 @@
                     <div class='control-option' id="export-button">
                             <input class="button" type="button" onclick="exportImage2()" value="Export PNG"></input>
                         </div>
-                    <!--<div class="control-option" id="sliders"></div>-->
-
-                    <!--<div class='control-option'>
-                            <input id="export-button" class="button" type="button" onclick="exportNetwork()" value="export"></input>
-                        </div>
-                    <div class="control-option" id="vis-config"></div>-->
 
                 </div>
 
@@ -217,10 +206,7 @@
 
                 //------EXECUTE AND EVENT LISTENERS------//
                 init()
-                set_nodeRange()
-                //UNUSED since ineffective and known scale
-                //set_edgeRange() 
-                //set_edgeChangeValue()   
+                set_nodeRange() 
                 set_edgeCutoff()
             }
         </script>

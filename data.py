@@ -263,37 +263,6 @@ def save_data():
     with open (filename,'w') as file:
         json.dump(data,file)
 
-    '''
-    filename = 'edges.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(edges,file)
-
-    filename = 'nodes.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(nodes,file)
-
-    filename = 'dates.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(dates,file)
-
-    filename = 'sectors.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(sectors,file)
-
-    filename = 'banks.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(sectors,file)
-    
-    filename = 'categoryKeys.json'
-    filepath = os.path.join(DIR, filename)
-    with open (filepath,'w') as file:
-        json.dump(categoryKeys,file)
-    '''
 if __name__ == '__main__':
    save_data()
    

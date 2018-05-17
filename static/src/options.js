@@ -93,36 +93,6 @@ const setOptions = () => {
     return OPTIONS
 }
 
-//node scale
-
-//distributes nodes on a circle
-const circleCoord = (selNodes,r,x0,y0) => {
-
-  var totalPerPeriod = selNodes.length
-  //choose how many circles to distribute on
-  var circles = 1;
-  var items = totalPerPeriod/circles;
-  var coord=[]
-  
-  //get the coordinates
-  for (var j=1; j<= circles;j++){
-      for(var i = 0; i < items; i++) {
-          var x= x0 + r * Math.cos(2 * Math.PI * i / items)*j;
-          var y = y0 + r * Math.sin(2 * Math.PI * i / items)*j;
-          var key = selNodes[i+j-1].id
-          //var key = banks[i+j-1].id
-          coord[key]= {x: x, y: y}
-      }
-  }
-  //add to nodes for first period and then keep allocation for the consecutive ones
-  selNodes = selNodes.map((node) => {  
-        node.x=coord[node.id].x; 
-        node.y=coord[node.id].y; 
-        node.fixed ={x: true, y: true};
-       return node});
-    return selNodes
-}
-
 const hideZeroValues = () => {
   //_edges.map((edge) => {if (edge.value==0) edge.hidden=true; else edge.hidden=false;})
   _nodes.map((node) => {if (node.value==0) node.hidden=true; else node.hidden=false;})

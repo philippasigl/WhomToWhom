@@ -20,6 +20,8 @@ var coreSector
 //saving the non historical positions, so switch can be turned off
 //var nohist_network
 var date
+var region
+var asset
 var herfindahlVal
 var _sector
 var _nodes

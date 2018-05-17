@@ -377,6 +377,7 @@ const setEdgeChangeSlider = (sliderID,rangeValues) => {
     console.log(rangeValues[rangeValues.length-1])
     noUiSlider.create(sliderID, {
     start: rangeValues[rangeValues.length-2].dateID,
+    step: 4,
     range: {
         min: rangeValues[0].dateID,
         max: rangeValues[rangeValues.length-1].dateID

@@ -373,6 +373,8 @@ const setEdgeRankSlider = (sliderID,startValue) => {
 }
 //slider determining which edges will be shown according to percentile rank
 const setEdgeChangeSlider = (sliderID,rangeValues) => {
+    console.log(rangeValues)
+    console.log(rangeValues[rangeValues.length-1])
     noUiSlider.create(sliderID, {
     start: rangeValues[rangeValues.length-2].date,
     range: {

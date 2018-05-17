@@ -279,11 +279,10 @@ const select_edgeSizeKey = () => {
 }
 
 const set_change = () => {
+    console.log(edges)
     let edgeSize  
     _edges.map((edge) => {
         let compEdge = edges.find(it => {
-            console.log(_comparisonDate)
-            console.log(it['dateID'])
             return it['dateID']==_comparisonDate && it['from']==edge['from'] && it['to']==edge['to']
         })
         compEdge == undefined ? edgeSize = 0 : edgeSize = edge['absValue'] - compEdge['absValue']

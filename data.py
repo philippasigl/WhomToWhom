@@ -156,6 +156,24 @@ def set_names(nodes):
         unique.append(node['id'])
     return banks
 
+def set_regions(nodes):
+    banks=[]
+    unique=[]
+    for node in nodes:
+        if node['region'] not in unique:
+            banks.append({'region': node['region']})
+        unique.append(node['region'])
+    return banks
+
+def set_assets(nodes):
+    banks=[]
+    unique=[]
+    for node in nodes:
+        if node['asset'] not in unique:
+            banks.append({'asset': node['asset']})
+        unique.append(node['asset'])
+    return banks
+
 def transform_nodes(nodes,keys):
     categoryKeys = set_categories()
     transformedNodes=[]    
@@ -237,7 +255,9 @@ def save_data():
     dates = set_dates(nodes)
     sectors = set_sectors(nodes)
     banks = set_names(nodes)
-    data = {"edges": edges,"nodes":nodes, "categoryKeys": categoryKeys, "dates": dates, "sectors":sectors,"banks":banks}
+    regions = set_regions(nodes)
+    assets = set_assets(nodes)
+    data = {"edges": edges,"nodes":nodes, "categoryKeys": categoryKeys, "dates": dates, "sectors":sectors,"banks":banks, "regions": regions, "assets": assets}
     
     filename = 'data.json'
     with open (filename,'w') as file:

@@ -72,7 +72,7 @@ const draw = () => {
     //}
    
     //subset nodes and edges by date; required to prevent duplicate id error
-    var data = select_date()
+    var data = select_data()
 
     //set minimum scale for nodes
     //_nodeRange[0] = _nodeRank
@@ -144,30 +144,13 @@ const exportImage2 = () => {
 }
 
 //------NETWORK PROPERTIES------//
-const switch_nodeCoord = () => {
-    nodeCoords = document.getElementById('nodeCoord').value
-    nodeCoords=='core-periphery' ? _innerCircleRadius = 100 : _innerCircleRadius = 400
-    disableCorePeripheryOptions()
+const switch_region = () => {
+    region = document.getElementById('region').value
     draw()
 }
 
-const select_nodeCoord = () => {
-    if (nodeCoords == 'default') {
-        _nodes=circleCoord(_nodes,_innerCircleRadius,0,0)
-    }
-    else if (nodeCoords == 'core-periphery') {
-       _nodes=corePeripheryCoord(coreSector)
-    }
-    else if (nodeCoords == 'grouped') {
-        _nodes=corePeripheryCoord()
-    }
-    var data = {nodes: _nodes, edges: _edges}
-    network.setData({nodes: _nodes, edges: _edges})
-}
-
-const switch_coreSector = () => {
-    let categoryCore = document.getElementById('coreCategory').value
-    coreSector = setCoreSector(categoryCore)
+const switch_asset = () => {
+    asset = document.getElementById('asset').value
     draw()
 }
 
@@ -176,9 +159,9 @@ const switch_date = () => {
     draw()
 }
 
-const select_date = () => {
-    _nodes = nodes.filter((node) => node.dateID == date)
-    _edges = edges.filter((edge) => edge.dateID == date)
+const select_data = () => {
+    _nodes = nodes.filter((node) => node.dateID == date && node.region == region && node.asset == asset)
+    _edges = edges.filter((edge) => edge.dateID == date && edge.region == region && edge.asset == asset)
    
     var data = {nodes: _nodes, edges: _edges}
 

@@ -47,6 +47,16 @@
                         <select class="Select-control" id="date" value="init()" onChange="switch_date()"></select>
                         <label for="date">Date</label>
                     </div>
+
+                    <div class="control-option">
+                        <select class="Select-control" id="region" value="init()" onChange="switch_region()"></select>
+                        <label for="date">Region</label>
+                    </div>
+
+                    <div class="control-option">
+                        <select class="Select-control" id="asset" value="init()" onChange="switch_asset()"></select>
+                        <label for="date">Asset</label>
+                    </div>    
                 </div>
 
                 <div class="flex-item" id="control-section">
@@ -135,6 +145,8 @@
         let sectors=[]
         let banks=[]
         let categoryKeys=[]
+        let regions=[]
+        let assets=[]
         
         let requestURL = '../data.json'
         let request = new XMLHttpRequest()
@@ -148,7 +160,28 @@
             banks = request.response.banks
             categoryKeys = request.response.categoryKeys
             dates = request.response.dates
-        
+            regions = request.response.regions
+            assets = request.response.assets 
+            console.log("dates",assets)
+
+        //region
+        $.each(region, function(index, value) {
+            if (index == 'Euro Area') {
+                jQuery("#region").append('<option value="' + value.region + '" selected>' + value.region + '</option>');
+            }
+            else {
+                jQuery("#region").append('<option value="' + value.region + '">' + value.region + '</option>');
+            }
+        })
+        //asset
+        $.each(assets, function(index, value) {
+            if (index == 'total') {
+                jQuery("#asset").append('<option value="' + value.asset + '" selected>' + value.asset + '</option>');
+            }
+            else {
+                jQuery("#asset").append('<option value="' + value.asset + '">' + value.asset + '</option>');
+            }
+        })
         //dates
         $.each(dates, function(index, value) {
             if (index == dates.length-1) {
@@ -158,45 +191,6 @@
                 jQuery("#date").append('<option value="' + value.dateID + '">' + value.date + '</option>');
             }
         })
-        //network shape
-        jQuery("#nodeCoord").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
-        jQuery("#nodeCoord").append('<option value="' + 'core-periphery' + '">' + 'core-periphery' + '</option>')
-        jQuery("#nodeCoord").append('<option value="' + 'grouped' + '">' + 'grouped' + '</option>')
-
-        //central nodes
-        //1) set options
-        $.each(categoryKeys.slice(0,-1), function(index, value) {
-            if (index == 0 ) {
-                jQuery("#coreCategory").append('<option selected=selected value="' + value+ '">' + value + '</option>')
-            }
-            else {
-                jQuery("#coreCategory").append('<option value="' +value+ '">' + value + '</option>')
-            }
-        })
-        //2) disable for default mode
-        disableCorePeripheryOptions = () => {
-            let value = document.getElementById("nodeCoord").value
-            console.log(value)
-            if (value == 'core-periphery') {
-                $('#coreCategory').prop('disabled', false);
-                $('#innerOuterRadius').prop('disabled', false);
-                $('#innerCircleRadius').prop('disabled', false);
-                $('#outerCirclesRadius').prop('disabled', false);
-            }
-            else if (value == 'grouped') {
-                $('#coreCategory').prop('disabled', true);
-                $('#innerOuterRadius').prop('disabled', false);
-                $('#innerCircleRadius').prop('disabled', true);
-                $('#outerCirclesRadius').prop('disabled', false);
-            }
-            else if (value == 'default') {
-                $('#coreCategory').prop('disabled', true);
-                $('#innerOuterRadius').prop('disabled', true);
-                $('#innerCirclesRadius').prop('disabled', false);
-                $('#outerCirclesRadius').prop('disabled', true);
-            }
-        }
-        $(disableCorePeripheryOptions)
 
         //sectors
         $.each(sectors, function(index, value) {
@@ -213,7 +207,6 @@
         })
         //node color
         jQuery("#nodeColor").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
-        if (customNodeColor == true) jQuery("#nodeColor").append('<option value="' + 'custom' + '">' + 'custom' + '</option>')
         jQuery("#nodeColor").append('<option value="' + 'none' + '">' + 'none' + '</option>')
         //edge size
         jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
@@ -224,6 +217,9 @@
         jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
         jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
         jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
+        
+        }
+
         //slider for scales
         setSlider = (sliderID,startValues,rangeValues) => {
             noUiSlider.create(sliderID, {
@@ -245,7 +241,7 @@
             }
             })
         }
-        }
+        
     </script>
     </div>
 </div>

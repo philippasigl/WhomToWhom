@@ -42,6 +42,8 @@ const init = () => {
     edgeSlider = document.getElementById('edgeSlider')  
     edgeSlider2 = document.getElementById('edgeSlider2')
     herfindahlVal = document.getElementById('herfindahl')
+    sectors = document.getElementById('sectors')
+    console.log("sectors",sectors)
     nodeCoords = 'default'
     nodeColor = 'default'
     nodeName = 'actual'

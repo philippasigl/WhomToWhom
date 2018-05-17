@@ -208,9 +208,6 @@ const nodeColorsBySector = () => {
     var cols = {}
     sectors.map((sector, idx) => cols[sector.sector]= colors[idx]) 
 
-    //var nodesArray = objectToArray(network.body.data.nodes._data);
-    //var edgesArray = objectToArray(network.body.data.edges._data);
-    //nodesArray = nodesArray.map((node) => { node.color = {background: cols[node.sector]}; return node})
     _nodes.map((node) => { node.color = {background: cols[node.sector]}; return node})
     network.setData({nodes: _nodes, edges: _edges})
 }

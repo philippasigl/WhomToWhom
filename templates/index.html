@@ -164,6 +164,10 @@
             assets = request.response.assets 
             console.log("dates",assets)
 
+        //sectors
+        $.each(sectors, function(index, value) {
+            jQuery("#sectors").append(value.sector);
+        })
         //region
         $.each(regions, function(index, value) {
             console.log("region")
@@ -197,10 +201,6 @@
             }
         })
 
-        //sectors
-        $.each(sectors, function(index, value) {
-                jQuery("#sector").append('<option selected=selected value="' + value.sector+ '">' + value.sector + '</option>');
-        })
         //node size
         $.each(categoryKeys, function(index, value) {
             if (index == categoryKeys.length-1) {
@@ -253,9 +253,6 @@
 
 <script type="text/javascript" src="../static/vis/examples/network/exampleUtil.js"></script>
 <script type="text/javascript" src="../static/vis/dist/vis.js"></script>
-
-<!--defines the physics of the network-->
 <script type="text/javascript" src="../static/src/options.js"></script>
 <script type="text/javascript" src="../static/src/network.js"></script>
-
 </body>

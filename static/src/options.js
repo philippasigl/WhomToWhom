@@ -277,7 +277,7 @@ const herfindahl = () => {
   let sumByNode = uniqueNodes.map((node) => {
     let total=0
     _edges.map((edge) => { if (edge.from==node || edge.to==node) total=total+edge.absValue})
-    return total
+    return total.toFixed(2)
   })
   let totalSum=0
   sumByNode.map((item) => {totalSum=totalSum+item})

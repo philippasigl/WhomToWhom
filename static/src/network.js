@@ -51,7 +51,6 @@ const init = () => {
     edgeSizeKey = 'absolute'
     edgeColorIsOn = false
     edgeColorLargestIsOn = false
-    coreSector = sectors[0].sector
     date = dates[dates.length-1].dateID
     asset = 'total'
     region = 'Euro Area'

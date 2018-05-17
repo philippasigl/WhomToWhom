@@ -308,7 +308,7 @@ const set_edgeRange = () => edgeSlider.noUiSlider.on('change', (values) => {
 */
 
 const set_edgeChangeValue = () => edgeChangeSlider.noUiSlider.on('change',(values) => {
-    _comparisonDate=parseFloat(values[0])
+    _comparisonDate=parseFloat(values[0].dateID)
     draw()
 })
 
@@ -376,10 +376,10 @@ const setEdgeChangeSlider = (sliderID,rangeValues) => {
     console.log(rangeValues)
     console.log(rangeValues[rangeValues.length-1])
     noUiSlider.create(sliderID, {
-    start: rangeValues[rangeValues.length-2].date,
+    start: rangeValues[rangeValues.length-2].dateID,
     range: {
-        min: rangeValues[0].date,
-        max: rangeValues[rangeValues.length-1].date
+        min: rangeValues[0].dateID,
+        max: rangeValues[rangeValues.length-1].dateID
     }
     })
 }

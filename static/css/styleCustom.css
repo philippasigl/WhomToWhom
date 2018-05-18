@@ -76,9 +76,9 @@ div {
     width: 96%;
     display: flex;
     margin: auto;
+    margin-top: 10%;
     flex-direction: column;
     justify-content: flex-start;
-    align-content: center;
 }
 
 .control-section {
@@ -307,7 +307,8 @@ div.vis-configuration.vis-config-label.vis-config-s4{
     width: 20rem;
     min-width: 20vw;
     margin-left: 0;
-    align-items: center;
+    margin-right: 2px;
+    align-items: top;
 }
 
 #network {

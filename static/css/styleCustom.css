@@ -2,11 +2,11 @@
 /*the network is style in options.js*/
 
 html {
-    font-family: 'Roboto', sans-serif;;
+    font-family: 'Roboto', sans-serif;
     /*font-family:  monospace;*/
     /*text-transform: uppercase;*/
     font-weight: 400;
-    font-size: 20px;
+    font-size: 14px;
     border-radius: 3px;
 }
 
@@ -14,15 +14,16 @@ h2 {
     display: flex;
     width: 100%;
     height: 4rem;
+    margin: 0;
+    padding: 5px;
+    align-items: center;
+    font-size: 1.5rem;
     background-color: #222;
-    padding: 10px;
-    margin-top: 0px;
-    margin-bottom: 10px;
     color: white;
-    font-size: 40px;
     /*text-transform: uppercase;*/
   }
 
+/*
 h3 {
     background-color:#222;
     height: 30px;
@@ -30,55 +31,82 @@ h3 {
     margin-top: 0px;
     color: white;
 }
-
+*/
 label {
-    height: 25px;
-    line-height: 25px;
+    height: inherit;
+    
+    white-space: nowrap;
+}
+
+body {
+    height: 100vh;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    background-color: #DCDCDC;
 }
 
 div {
     display: block;
+    box-sizing: border-box;
+    margin: 2px;
 }
 
 .flex-container {
     padding: 0;
     margin: 0;
     flex-grow: 1;
-    list-style: none;
+    width: 100%;
+    height: calc(100% - 4rem);
     display: flex;
-    display: -webkit-box;
-    display: -moz-box;
-    display: -ms-flexbox;
-    display: -webkit-flex;
-    justify-content: space-around;
 }
 
 .flex-item {
-    position: fixed;
-    height: calc(100-4rem);
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+    min-height: 1000px;
     padding: 5px;
-    margin: 5px;
     flex-shrink: 0;
+    background-color:white;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; 
+    border-radius: 3px;
 }
 
 .option-list{
-    margin-top: 50px;
-    margin-left: 10px;
-    margin-right: 40px;
+    width: 96%;
     display: flex;
+    margin: auto;
     flex-direction: column;
     justify-content: flex-start;
-    align-content: flex-start;
+    align-content: center;
 }
 
-.control-option{
+.control-section {
     display: flex;
-    flex-direction: row;
+    flex-basis: content;
+    flex-direction: column;
+    background: white;
+    border: thin solid lightgray;
+    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; 
+    /*font-size: 12px;*/
+    /*font-weight: 600;*/
+    padding: 5px 5px;
+    margin-bottom: 5px;
+}
+
+.control-option {
+    display: flex;
+    flex-shrink: 2;
+    margin-top: inherit;
+    margin-bottom: inherit;
+    min-height: 40px;
+    vertical-align: middle;
     align-items: center;
-    /*text-align: center;*/
+    /*
     margin-top: 10px;
     margin-bottom: 20px;
-    margin-left: 20px;
+    margin-left: 20px;*/
     /*vertical-align: middle;*/
 }
 
@@ -100,7 +128,6 @@ div {
     -webkit-appearance: push-button;
     user-select: none;
     white-space: pre;
-    
 }
 
 .button{
@@ -200,18 +227,8 @@ div {
     /*font-size: 20px;*/
 }
 
-#control-section{
-    background: white;
-    border: thin solid lightgray;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; 
-    cursor: pointer;
-    /*font-size: 12px;*/
-    /*font-weight: 600;*/
-    padding: 5px 10px;
-    margin: 20px;
-}
-
 /*unused*/
+/*
 #vis-config {
     font-size: 18px;
     font-style: normal;
@@ -249,7 +266,7 @@ div.vis-configuration.vis-config-label.vis-config-s3{
 div.vis-configuration.vis-config-label.vis-config-s4{
     width: 150px;
 }
-
+*/
 .button:hover {
         background: lightgrey;
 }
@@ -264,11 +281,6 @@ div.vis-configuration.vis-config-label.vis-config-s4{
     padding: 10px;
     color: #222;
 }
-
-body {
-    background-color:#dfdfdf;
-    padding: 0px;
-  }
 
 .Select-control {
     display: block;
@@ -291,19 +303,15 @@ body {
 }
 
 #controls {
-    width: 17rem;
-    background-color:white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; 
-    border-radius: 3px;
+    width: 20rem;
+    min-width: 20vw;
+    margin-left: 0;
+    align-items: center;
 }
 
 #network {
-    display: flex;
     flex-grow: 1;
-    width: 100%;
-    background-color: white;
-    box-shadow: rgba(0, 0, 0, 0.1) 0px 1px 2px 0px; 
-    border-radius: 3px;
+    width: calc(100% - 20rem);
 }
 
 .center-aligned-controls {
@@ -311,7 +319,7 @@ body {
     display: flex;
     justify-content: space-between;
     padding: 10px 0;
-    width: 100%
+    width: 100%;
 } 
 .showcase-button {
     background: white;

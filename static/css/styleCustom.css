@@ -110,6 +110,10 @@ div {
     /*vertical-align: middle;*/
 }
 
+.noUi-base {
+    margin: 0;
+}
+
 .checkbox {
     display: inline-block;
     width: 20px;
@@ -287,7 +291,7 @@ div.vis-configuration.vis-config-label.vis-config-s4{
     float: left;
     /*width: 495px;*/
     /*height: 25px;*/
-    min-width: 30%;
+    width: 40%;
     /*width: 20%; */
     height: 40px; 
     margin-right: 10px;

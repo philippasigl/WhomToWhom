@@ -1,7 +1,7 @@
 /* custom styles */
 
 html {
-    font-family: 'Quicksand';
+    font-family: 'Roboto', sans-serif;;
     /*font-family:  monospace;*/
     /*text-transform: uppercase;*/
     font-weight: 400;
@@ -156,7 +156,7 @@ label {
 }
 
 #select-files{
-    font-family: 'Quicksand';
+    font-family: inherit;
     font-size: inherit;
     /*font-size: 20px;*/
 }
@@ -181,7 +181,7 @@ label {
 }
   
 #submit{
-    font-family: 'Quicksand';
+    font-family: inherit;
     font-size: inherit;
     /*font-size: 20px;*/
 }

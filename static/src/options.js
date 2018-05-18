@@ -47,7 +47,7 @@ const setOptions = () => {
           multiselect: true
         },
         edges: {
-          font: {face: 'Quicksand'},
+          font: {face: 'Roboto'},
           color: {color:'lightgrey'},
           arrows: {to: {enabled: true}},
           smooth: {
@@ -58,7 +58,7 @@ const setOptions = () => {
           scaling: {min: _edgeRange[0], max: _edgeRange[1]}
         },
         nodes: {
-          font: {color: 'white', face: 'Quicksand'},
+          font: {color: 'white', face: 'Roboto'},
           borderWidth: 0,
           color: {border: 'white', background: '#89DAC1', highlight: {background: '#FF991F'}},
           shape: 'circle',

@@ -55,11 +55,7 @@
 
                     <div class="control-section">
                     <p>Nodes</p>
-                        <div class="control-option">
-                            <select class="Select-control" id="nodeName" onChange="switch_nodeName()"></select>
-                            <label for="nodeName">Node labels</label>
-                        </div>
-
+                    
                         <div class="control-option">
                             <select class="Select-control" id="nodeSize" onChange="switch_nodeSizeKey()"></select>
                             <label for="nodeSize">Node size</label>
@@ -68,11 +64,6 @@
                         <div class="control-option">
                             <div id="nodeSlider" class="slider"></div>
                             <label for="nodeSlider">Node scale</label>
-                        </div>
-
-                        <div class="control-option">
-                            <select class="Select-control" id="nodeColor" onChange="switch_nodeColor()"></select>
-                            <label for="nodeSize">Node color</label>
                         </div>
 
                     </div>
@@ -181,10 +172,6 @@
                     }
                 })
 
-                //node color
-                jQuery("#nodeColor").append('<option value="' + 'default' + '" selected>' + 'default' + '</option>')
-                jQuery("#nodeColor").append('<option value="' + 'none' + '">' + 'none' + '</option>')
-
                 //edge size
                 jQuery("#edgeSize").append('<option value="' + 'absolute' + '" selected>' + 'absolute' + '</option>')
                 jQuery("#edgeSize").append('<option value="' + 'change' + '">' + 'change' + '</option>')
@@ -198,11 +185,6 @@
                         jQuery("#comparisonDate").append('<option value="' + value.dateID + '">' + value.date + '</option>');
                     }
                 })
-
-                //bank name
-                jQuery("#nodeName").append('<option value="' + 'actual' + '" selected>' + 'actual' + '</option>')
-                jQuery("#nodeName").append('<option value="' + 'anonymised' + '">' + 'anonymised' + '</option>')
-                jQuery("#nodeName").append('<option value="' + 'none' + '">' + 'none' + '</option>')
 
                 //------EXECUTE AND EVENT LISTENERS------//
                 init()

@@ -4,15 +4,11 @@ var network
 var container
 var exportButton
 var nodeSlider
-//var edgeSlider
 var edgeSlider2
-//var edgeChangeSlider
 var selectedEdgeIDs
 var nodeCoords
-var nodeColor
 var edgeColorIsOn
 var edgeColorLargestIsOn
-var nodeName
 var nodeSizeKey
 var edgeSizeKey
 var date
@@ -27,7 +23,6 @@ var _nodeRange
 var _edgeRange
 var _comparisonDate
 var _edgeCutoff
-//var date
 
 const init = () => {
     container = document.getElementById('network')
@@ -37,9 +32,7 @@ const init = () => {
     edgeSlider2 = document.getElementById('edgeSlider2')
     //edgeChangeSlider = document.getElementById('edgeChangeSlider')
     herfindahlVal = document.getElementById('herfindahl')
-    nodeCoords = 'default'
-    nodeColor = 'default'
-    nodeName = 'actual'
+    //nodeCoords = 'default'
     nodeSizeKey = 'no value'
     edgeSizeKey = 'absolute'
     edgeColorIsOn = false
@@ -78,14 +71,14 @@ const draw = () => {
     set_change()
 
     //set colors
-    select_nodeColor()
+    nodeColorsBySector()
     if (edgeColorIsOn) set_edge_color()
     else unset_edge_color()
     if (edgeColorLargestIsOn) edgeHighlightLargest()
     if (edgeColorIsOn == false && edgeColorLargestIsOn == false) unset_edge_color()
     
     //set node labels
-    select_nodeName()
+    set_nodeName()
 
     //set category for node and edge sizes
     select_nodeSizeKey()
@@ -120,21 +113,6 @@ const set_levels = () => {
 const set_tooltips = () => {
     _edges.map((edge) => {edge.title= edge.from+" to "+ edge.to + " value " + edge.value})
     _nodes.map((node) => {node.title= node.label+ " value "+ node.value})
-}
-
-const exportImage2 = () => {
-    let dateLabel = (Math.floor(date/12)).toString() + (date % 12).toString()
-    let canvas = document.getElementsByTagName('canvas')
-    let nodeProps = 'n_' + nodeName + '_' + nodeSizeKey + '_' + nodeColor
-    let edgeProps = 'e_' + '_'+ edgeSizeKey + '_'+ edgeColorIsOn
-    let netProps = 'net_' + nodeCoords + '_' + _sector
-    let canvas_filename = dateLabel + ' ' + netProps + ' ' + nodeProps + ' ' + edgeProps
-        canvas[0].toBlobHD(function(blob) {
-            saveAs(
-                  blob
-                , (canvas_filename) + ".png"
-            );
-        }, "image/png");
 }
 
 //------NETWORK PROPERTIES------//
@@ -196,15 +174,8 @@ const unsetHighlight = () => network.on("deselectNode", function () {
 })
 
 //------NODE PROPERTIES------//
-const switch_nodeName = () => {
-    nodeName = document.getElementById('nodeName').value
-    draw()
-}
-
-const select_nodeName = () => {
-    if (nodeName == 'actual') _nodes.map((node) => node.label=node.name)
-    else if (nodeName == 'anonymised') _nodes.map((node,idx) => node.label="Item "+ idx.toString())
-    else if (nodeName == 'none') _nodes.map((node) => node.label="        ")
+const set_nodeName = () => {
+    _nodes.map((node) => node.label=node.name)
 }
 
 const switch_nodeSizeKey = () => {
@@ -229,18 +200,6 @@ const set_nodeRange = () => nodeSlider.noUiSlider.on('change', (values) => {
         _nodeRange[1]=parseInt(values[1])
         draw()
 })
-
-const switch_nodeColor = () => {
-    nodeColor = document.getElementById('nodeColor').value
-    draw()
-}
-
-const select_nodeColor = () => {
-    if (nodeColor == 'default') nodeColorsBySector()
-    //else if (nodeColor == 'custom') nodeColorsCustom()
-    else nodeColorsUniform()
-    network.setData({nodes: _nodes, edges: _edges})
-}
 
 //------EDGE PROPERTIES------//
 const switch_edgeSizeKey = () => {
@@ -357,5 +316,22 @@ objectToArray = (obj) => {
     }
     )
     return arr
+}
+*/
+
+/*
+const exportImage2 = () => {
+    let dateLabel = (Math.floor(date/12)).toString() + (date % 12).toString()
+    let canvas = document.getElementsByTagName('canvas')
+    let nodeProps = 'n_' + nodeName + '_' + nodeSizeKey + '_' + nodeColor
+    let edgeProps = 'e_' + '_'+ edgeSizeKey + '_'+ edgeColorIsOn
+    let netProps = 'net_' + nodeCoords + '_' + _sector
+    let canvas_filename = dateLabel + ' ' + netProps + ' ' + nodeProps + ' ' + edgeProps
+        canvas[0].toBlobHD(function(blob) {
+            saveAs(
+                  blob
+                , (canvas_filename) + ".png"
+            );
+        }, "image/png");
 }
 */

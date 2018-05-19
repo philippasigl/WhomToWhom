@@ -117,19 +117,6 @@ const nodeColorsBySector = () => {
     network.setData({nodes: _nodes, edges: _edges})
 }
 
-const nodeColorsUniform = () => {
-    //var nodesArray = objectToArray(network.body.data.nodes._data);
-    //var edgesArray = objectToArray(network.body.data.edges._data);
-    //nodesArray = nodesArray.map((node) => { node.color = {background: 'darkgrey', highlight: 'black'}; return node});
-    _nodes.map((node) => { node.color = {background: 'darkgrey', highlight: 'black'}; return node})
-    network.setData({nodes: _nodes, edges: _edges})
-}
-
-const nodeColorsCustom = () => {
-  _nodes.map((node) => { node.color = {background: node.customColor, highlight: '#FF991F'}; return node})
-  network.setData({nodes: _nodes, edges: _edges})
-}
-
 const edgeColorsByTrend = () => {
     _edges.map((edge) => {edge.color = {color: COLORS[edge['trend']], opacity: 0.2, highlight: COLORS[edge['trend']]}; return edge})
     network.setData({nodes: _nodes, edges: _edges})
@@ -163,7 +150,6 @@ const edgeSelectBySize = (cutOffPoint) => {
 const edgeHighlightLargest = () => {
   _edges.map((edge) => {if (edge.absRank>_edges.length-4) { edge.color = {color: '#FF991F', opacity: 1}; return edge} })
   network.setData({nodes: _nodes, edges: _edges})
-  console.log("highlighted")
 }
 
 const herfindahl = () => {

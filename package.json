@@ -1,0 +1,25 @@
+{
+  "name": "WhomToWhom",
+  "version": "1.0.0",
+  "description": "",
+  "main": "index.html",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/philippasigl/WhomToWhom.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/philippasigl/WhomToWhom/issues"
+  },
+  "homepage": "https://philippasigl.com/WhomToWhom",
+  "dependencies": {
+    "vis": "^4.21.0",
+    "nouislider": "^11.1.0",
+    "jquery": "^3.3.1"
+  }
+}

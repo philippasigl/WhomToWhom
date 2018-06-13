@@ -174,13 +174,19 @@ const herfindahl = () => {
  // _nodes((node) => {if (node)})
 }
 
-const setRatio = () => network.on("click", function () {
+const setRatio = () => network.on("select", function () {
   console.log(network.getSelection())
   let selection = network.getSelection()
   let item
-  if (selection.nodes.length == 0) item = selection.edges[0]
-  else item = selection.nodes[0]
-  console.log(item)
+  if (selection.nodes.length == 0) {
+    let arr = selectEdges(selection.edges)
+    item = arr[0]
+  }  
+  else {
+    let arr = selectNodes(selection.nodes)
+    item = arr[0]
+  }
+  console.log("selected item ",item)
   if (_xHighlighted == 0) {
       _xHighlighted = item
       _xHighlightedName = item.id.slice(0,-1)

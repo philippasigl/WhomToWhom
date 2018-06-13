@@ -179,11 +179,11 @@ const setRatio = () => network.on("select", function () {
   let selection = network.getSelection()
   let item
   if (selection.nodes.length == 0) {
-    let arr = selectEdges(selection.edges)
+    let arr = network.selectEdges(selection.edges)
     item = arr[0]
   }  
   else {
-    let arr = selectNodes(selection.nodes)
+    let arr = network.selectNodes(selection.nodes)
     item = arr[0]
   }
   console.log("selected item ",item)

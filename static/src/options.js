@@ -174,33 +174,39 @@ const herfindahl = () => {
  // _nodes((node) => {if (node)})
 }
 
-const setRatio = () => network.on("select", function () {
-  console.log(network.getSelection())
+const setRatio = () => network.on("select", function (param) {
+  if (param.edges.length==0 && param.nodes.length==0) return
+  //get the selected item and check whether node or edge is highlighted
   let selection = network.getSelection()
-  let item
+  let val
+  let name
+
+  //if the selection is an edge
   if (selection.nodes.length == 0) {
-    let arr = network.selectEdges(selection.edges)
-    item = arr[0]
+    let arr = network.body.edges[selection.edges[0]]
+    val = arr.options.value
+    name = arr.options.from + " to " + arr.options.to
   }  
+  //if the selection is a node
   else {
-    let arr = network.selectNodes(selection.nodes)
-    item = arr[0]
+    let arr = network.body.nodes[selection.nodes[0]]
+    val = arr.options.value
+    name = arr.options.name
   }
-  console.log("selected item ",item)
   if (_xHighlighted == 0) {
-      _xHighlighted = item
-      _xHighlightedName = item.id.slice(0,-1)
+      _xHighlighted = val
+      _xHighlightedName = name
       document.getElementById('ratio-name1').innerHTML = _xHighlightedName
       document.getElementById('ratio-name2').innerHTML = ''
       document.getElementById('ratio-value').innerHTML = ''
   }
   else {
-      _ratio = _xHighlighted.value/item.value
-      _xHighlighted2 = item
+      _ratio = _xHighlighted/val
+      _xHighlighted2 = val
       //_xHighlighted = 0
-      let formRatio = (_ratio*100).toFixed(2) + '%'
+      let formRatio = (_ratio*100).toFixed(1) + '%'
       document.getElementById('ratio-value').innerHTML = formRatio
-      document.getElementById('ratio-name2').innerHTML = item.id.slice(0,-1)
+      document.getElementById('ratio-name2').innerHTML = name
   }
   if (_xHighlighted !=0 && _xHighlighted2 != 0) {
       _xHighlighted=0
@@ -208,3 +214,4 @@ const setRatio = () => network.on("select", function () {
   }
   //console.log(d)
 })
+

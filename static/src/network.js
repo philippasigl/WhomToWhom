@@ -98,6 +98,7 @@ const draw = () => {
     //set highlighting options (which depend on the chosen color options)
     setHighlight()
     unsetHighlight()
+    setRatio()
     herfindahlVal.innerText=herfindahl()
     
 }

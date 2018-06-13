@@ -174,7 +174,7 @@ const herfindahl = () => {
  // _nodes((node) => {if (node)})
 }
 
-const setHighlightedX = () => network.on("click", function () {
+const setRatio = () => network.on("click", function () {
   console.log(network.getSelection())
   let selection = network.getSelection()
   let item

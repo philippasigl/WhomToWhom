@@ -1,5 +1,10 @@
 "use strict";
 
+var _xHighlighted = 0
+var _xHighlighted2 = 0
+var _ratio = 0
+var _xHighlightedName
+
 //black,green,red,grey
 const COLORS = { 'unchanged' :'#222233', 'increased' : '#4DC19C', 'decreased' : '#F89570', 'no_info': '#778899'}
 const BLURRED_LINK_OPACITY = 0.3
@@ -168,3 +173,31 @@ const herfindahl = () => {
   return result.toFixed(2)
  // _nodes((node) => {if (node)})
 }
+
+const setHighlightedX = () => network.on("click", function () {
+  let selection = network.getSelection()
+  let item
+  if (selection.nodes.length == 0) toHighlight = selection.edges[0]
+  else toHighlight = selection.nodes[0]
+  
+  if (_xHighlighted == 0) {
+      _xHighlighted = item
+      _xHighlightedName = item.id.slice(0,-1)
+      document.getElementById('ratio-name1').innerHTML = _xHighlightedName
+      document.getElementById('ratio-name2').innerHTML = ''
+      document.getElementById('ratio-value').innerHTML = ''
+  }
+  else {
+      _ratio = _xHighlighted.value/item.value
+      _xHighlighted2 = item
+      //_xHighlighted = 0
+      let formRatio = (_ratio*100).toFixed(2) + '%'
+      document.getElementById('ratio-value').innerHTML = formRatio
+      document.getElementById('ratio-name2').innerHTML = item.id.slice(0,-1)
+  }
+  if (_xHighlighted !=0 && _xHighlighted2 != 0) {
+      _xHighlighted=0
+      _xHighlighted2=0
+  }
+  //console.log(d)
+})

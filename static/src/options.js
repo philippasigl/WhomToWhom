@@ -175,11 +175,12 @@ const herfindahl = () => {
 }
 
 const setHighlightedX = () => network.on("click", function () {
+  console.log(network.getSelection())
   let selection = network.getSelection()
   let item
-  if (selection.nodes.length == 0) toHighlight = selection.edges[0]
-  else toHighlight = selection.nodes[0]
-  
+  if (selection.nodes.length == 0) item = selection.edges[0]
+  else item = selection.nodes[0]
+  console.log(item)
   if (_xHighlighted == 0) {
       _xHighlighted = item
       _xHighlightedName = item.id.slice(0,-1)

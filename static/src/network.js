@@ -67,6 +67,8 @@ const draw = () => {
     //draw current network
     network = new vis.Network(container, data, _options)
 
+    //save positions
+    network.storePositions()
     //set change in edges for given reference period
     set_change()
 

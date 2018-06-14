@@ -324,6 +324,7 @@ div.vis-configuration.vis-config-label.vis-config-s4{
 #network {
     flex-grow: 1;
     width: calc(100% - 20rem);
+    background-color: white;
 }
 
 .center-aligned-controls {

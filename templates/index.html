@@ -21,8 +21,54 @@
 </head>
 
 <body>
-<h2 id="print">Financial Networks Explorer</h2>
+    <div id="top-bar">
+        <h2 id="print">Euro Area Financial System Explorer</h2>
+        <button class="button" id="btn">What is displayed here?</button>
+    </div>
+
+    <!--modal-->
+    <div id="myModal" class="modal">
+
+        <!-- Modal content -->
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>
+            The visualisation draws on the <a href="http://sdw.ecb.europa.eu/reports.do?node=1000002345">ECB's who to whom data</a>.
+            It shows sectoral exposures for the selected region (default: Euro Area), asset (default: total) and period (default: 2017/12). <br/>
+            <br/>
+            Arrows run from providers of financing to recipients. An example: An arrow from 'mfi' to 'nfc' indicates 
+            the amount of funding mfis have provided to nfcs. <br/>
+            <br/>
+            Values are shown in Euro billions. <br/>
+            <br/>
+            Nodes <br/>
+            <ul>
+              <li>Size: No value (default), total assets or total liabilities of the sector. 
+                The size of the rest of the world node is fixed at 5 trillion to allow for the comparison of absolute sizes. </li>
+              <li>Colour: Economic group (banks as producers of money in bright blue, 
+                the financial sector in dark blue, the real economy in dark green, and the rest of the world in turquoise). 
+                Selecting a node highlights the node and all in- and outgoing edges </li>
+              <li>Position: Economic group</li>
+              <li>Scale: Allows the user to change the minimum and maxium size for nodes</li>
+            </ul>
+            Edges <br/>
+            <ul>
+                <li>Size: Absolute exposure size (default) or change to selected reference period</li>
+                <li>Colour: Can be changed to indicate trend to reference period. Green: Increase. Red: Decrease. Grey: No information</li>
+                <li>Highlight: The largest three edges can be highlighted in yellow</li>
+                <li>Scale: Allows the user to change the minimum and maxium size for edges</li>
+            </ul>
+            Analysis <br/>
+            <ul>
+                <li>Herfindahl index of all exposures in the network displayed</li>
+                <li>Ratio: Allows the user to compare any elements of the visualisation by selecting the former </li>
+            </ul>
+          </p>
+        </div>
+      
+      </div>
     
+    <!--main application-->  
     <div id="canvas" class="flex-container">
         <div id="controls" class="flex-item">
                 <div class="option-list">

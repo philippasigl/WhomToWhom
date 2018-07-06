@@ -230,10 +230,10 @@
 
                 //node size
                 $.each(categoryKeys, function(index, value) {
-                    if (index == categoryKeys.length-1) {
+                    if (value == 'Assets') {
                         jQuery("#nodeSize").append('<option value="' + value + '" selected>' + value + '</option>')
                     }
-                    else {
+                    else if (index != categoryKeys.length-1) {
                         jQuery("#nodeSize").append('<option value="' + value + '">' + value + '</option>')
                     }
                 })

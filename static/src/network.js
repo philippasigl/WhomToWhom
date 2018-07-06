@@ -114,8 +114,8 @@ const set_levels = () => {
 }
 
 const set_tooltips = () => {
-    _edges.map((edge) => {edge.title= edge.from+" to "+ edge.to + " value " + edge.value})
-    _nodes.map((node) => {node.title= node.label+ " value "+ node.value})
+    _edges.map((edge) => {edge.title= edge.from+" to "+ edge.to + ": &euro " + edge.value + " bn"})
+    _nodes.map((node) => {node.title= node.label+ ": &euro "+ node.value + " bn"})
 }
 
 //------NETWORK PROPERTIES------//

@@ -115,7 +115,7 @@ const set_levels = () => {
 
 const set_tooltips = () => {
     _edges.map((edge) => {edge.title= edge.from+" to "+ edge.to + ": € " + edge.value + " bn"})
-    _nodes.map((node) => {node.title= node.label+ ": € "+ node.value + " bn"})
+    nodeSizeKey == 'no value' ? _nodes.map((node) => {node.title= node.label}) : _nodes.map((node) => {node.title= node.label+ ": € "+ node.value + " bn"})
 }
 
 //------NETWORK PROPERTIES------//
@@ -190,7 +190,7 @@ const switch_nodeSizeKey = () => {
 const select_nodeSizeKey = () => {
     let nodeSize  
     _nodes.map((node) => {
-        nodeSizeKey == 'no value' ? nodeSize = 1 : nodeSize = parseInt(node[nodeSizeKey])
+        nodeSizeKey == 'no value' ? nodeSize = 50000 : nodeSize = parseInt(node[nodeSizeKey])
         node.value=nodeSize
         node.title=nodeSize
     })

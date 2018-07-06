@@ -196,7 +196,6 @@ const select_nodeSizeKey = () => {
     })
     var data = {nodes: _nodes, edges: _edges}
     network.setData({nodes: _nodes, edges: _edges})
-    console.log(network)
 }
 
 const set_nodeRange = () => nodeSlider.noUiSlider.on('change', (values) => {

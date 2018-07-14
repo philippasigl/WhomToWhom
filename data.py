@@ -215,7 +215,7 @@ def transform_edges(edges):
     return transformedEdges
 
 def upload_files():
-    path=os.path.abspath("C:/Users/Philippa/Desktop/Econ research/Whom to whom/Data")
+    path=os.path.abspath("C:/Users/Philippa/Repo/WhomToWhom/upload_data/Data")
     edges=[]
     nodes=[]
     #iterator 1 for all regions

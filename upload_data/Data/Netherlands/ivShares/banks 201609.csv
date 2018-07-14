@@ -1,0 +1,9 @@
+Node,Sector,time,Assets,Liabilities
+iv,Non-banks,2016-Q3,789.01,819.39
+nfc,Real economy,2016-Q3,1626.81,2161.92
+mfi,Banks,2016-Q3,2585.61,2599.38
+ofi,Non-banks,2016-Q3,5207.72,5230.29
+icpf,Non-banks,2016-Q3,1913.64,1946.46
+hh,Real economy,2016-Q3,2433.36,840.18
+govt,Real economy,2016-Q3,331.75,633.11
+row,row,2016-Q3,5000,5000

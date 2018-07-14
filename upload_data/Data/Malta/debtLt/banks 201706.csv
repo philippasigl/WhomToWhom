@@ -1,0 +1,9 @@
+Node,Sector,time,Assets,Liabilities
+iv,Non-banks,2017-Q2,4.88,4.7
+nfc,Real economy,2017-Q2,24.03,30.23
+mfi,Banks,2017-Q2,53.54,52.84
+ofi,Non-banks,2017-Q2,182.89,182.42
+icpf,Non-banks,2017-Q2,9.34,11.58
+hh,Real economy,2017-Q2,24.26,6.58
+govt,Real economy,2017-Q2,4.24,8.5
+row,row,2017-Q2,5000,5000

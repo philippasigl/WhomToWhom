@@ -1,0 +1,9 @@
+Node,Sector,time,Assets,Liabilities
+iv,Non-banks,2013-Q4,177.77,183.64
+nfc,Real economy,2013-Q4,2053.61,3431
+mfi,Banks,2013-Q4,3405.05,3334.95
+ofi,Non-banks,2013-Q4,629.55,641.01
+icpf,Non-banks,2013-Q4,382.46,396.46
+hh,Real economy,2013-Q4,1932.53,842.13
+govt,Real economy,2013-Q4,644.19,1356.19
+row,row,2013-Q4,5000,5000

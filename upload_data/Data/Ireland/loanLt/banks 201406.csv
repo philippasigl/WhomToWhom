@@ -1,0 +1,9 @@
+Node,Sector,time,Assets,Liabilities
+iv,Non-banks,2014-Q2,1336.11,1356.04
+nfc,Real economy,2014-Q2,774.44,1068.07
+mfi,Banks,2014-Q2,1104.51,1114.26
+ofi,Non-banks,2014-Q2,990.22,979.25
+icpf,Non-banks,2014-Q2,323.4,332.54
+hh,Real economy,2014-Q2,336.81,171.79
+govt,Real economy,2014-Q2,87.55,245.1
+row,row,2014-Q2,5000,5000

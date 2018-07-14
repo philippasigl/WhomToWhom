@@ -78,6 +78,7 @@ const draw = () => {
     else unset_edge_color()
     if (edgeColorLargestIsOn) edgeHighlightLargest()
     if (edgeColorIsOn == false && edgeColorLargestIsOn == false) unset_edge_color()
+    else if (edgeColorLargestIsOn == false) set_edge_color()
     
     //set node labels
     set_nodeName()

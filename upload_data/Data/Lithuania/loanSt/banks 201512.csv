@@ -1,0 +1,9 @@
+Node,Sector,time,Assets,Liabilities
+iv,Non-banks,2015-Q4,0.35,0.4
+nfc,Real economy,2015-Q4,33.93,64.5
+mfi,Banks,2015-Q4,36.09,35.64
+ofi,Non-banks,2015-Q4,5.34,4.99
+icpf,Non-banks,2015-Q4,3.51,3.49
+hh,Real economy,2015-Q4,33.33,10.99
+govt,Real economy,2015-Q4,15.23,24.17
+row,row,2015-Q4,5000,5000

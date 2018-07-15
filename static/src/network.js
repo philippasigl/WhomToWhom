@@ -68,7 +68,7 @@ const draw = () => {
     network = new vis.Network(container, data, _options)
 
     //save positions
-    network.storePositions()
+    //network.storePositions()
     
     //set change in edges for given reference period
     set_change()
@@ -107,6 +107,7 @@ const draw = () => {
     //fixes nodes at predefined positions
     setCoords()
     
+    console.log(network.getPositions())
 }
 
 const set_levels = () => {

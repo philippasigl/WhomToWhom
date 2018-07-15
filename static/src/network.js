@@ -69,6 +69,7 @@ const draw = () => {
 
     //save positions
     network.storePositions()
+    
     //set change in edges for given reference period
     set_change()
 
@@ -102,6 +103,9 @@ const draw = () => {
     unsetHighlight()
     setRatio()
     herfindahlVal.innerText=herfindahl()
+
+    //fixes nodes at predefined positions
+    setCoords()
     
 }
 

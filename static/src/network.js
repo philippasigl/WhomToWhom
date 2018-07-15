@@ -41,12 +41,14 @@ const init = () => {
     asset = 'total'
     region = 'Euro Area'
     _sector = 'all'
-    _nodeRange = [20,200]
-    _edgeRange = [0.3,30]
+    //_nodeRange = [20,200]
+    //_edgeRange = [0.3,30]
+    _nodeRange = [60,600]
+    _edgeRange = [0.9,90]
     //initialised to last and second to last value
     _comparisonDate = dates[dates.length-1].dateID
-    let edgeRange = [0.3,30]
-    let nodeRange = [20,200]
+    let edgeRange = [0.9,90]
+    let nodeRange = [60,600]
     _edgeCutoff = 0.1
     setSlider(nodeSlider,_nodeRange,nodeRange)
     setEdgeRankSlider(edgeSlider2,_edgeCutoff)

@@ -35,6 +35,7 @@ const setOptions = () => {
         height: '100%',
         width: '100%',
         physics: {
+          enabled: false,
           hierarchicalRepulsion: {nodeDistance: 400}
         },
         layout: { 
@@ -216,12 +217,12 @@ const setRatio = () => network.on("select", function (param) {
 })
 
 const setCoords = () => {
-  network.moveNode('govt',600,500)
-  network.moveNode('hh',600,-500)
-  network.moveNode('icpf',0,500)
-  network.moveNode('iv',0,-1500)
-  network.moveNode('ofi',0,-500)
-  network.moveNode('mfi',-600,0)
-  network.moveNode('row',600,1500)
-  network.moveNode('nfc',600,-1500)
+  network.moveNode('govt',500,100)
+  network.moveNode('hh',500,-100)
+  network.moveNode('icpf',0,250)
+  network.moveNode('iv',0,-250)
+  network.moveNode('ofi',0,0)
+  network.moveNode('mfi',-500,0)
+  network.moveNode('row',500,400)
+  network.moveNode('nfc',500,-400)
 }

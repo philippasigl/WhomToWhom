@@ -217,12 +217,13 @@ const setRatio = () => network.on("select", function (param) {
 })
 
 const setCoords = () => {
-  network.moveNode('govt',1000,200)
-  network.moveNode('hh',1000,-200)
-  network.moveNode('icpf',0,500)
-  network.moveNode('iv',0,-500)
+  let scale = 1.3
+  network.moveNode('govt',1000*scale,200*scale)
+  network.moveNode('hh',1000*scale,-200*scale)
+  network.moveNode('icpf',0,500*scale)
+  network.moveNode('iv',0,-500*scale)
   network.moveNode('ofi',0,0)
-  network.moveNode('mfi',-1000,0)
-  network.moveNode('row',1000,800)
-  network.moveNode('nfc',1000,-800)
+  network.moveNode('mfi',-1000*scale,0)
+  network.moveNode('row',1000*scale,800*scale)
+  network.moveNode('nfc',1000*scale,-800*scale)
 }

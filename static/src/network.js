@@ -107,7 +107,6 @@ const draw = () => {
     //fixes nodes at predefined positions
     setCoords()
     
-    console.log(network.getPositions())
 }
 
 const set_levels = () => {

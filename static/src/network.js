@@ -72,6 +72,13 @@ const draw = () => {
     //set change in edges for given reference period
     set_change()
 
+    //set category for node and edge sizes
+    select_nodeSizeKey()
+    select_edgeSizeKey()
+
+    //calculate the relative size for the edges
+    edgeRank()
+
     //set colors
     nodeColorsBySector()
     if (edgeColorIsOn) set_edge_color()
@@ -82,16 +89,9 @@ const draw = () => {
     //set node labels
     set_nodeName()
 
-    //set category for node and edge sizes
-    select_nodeSizeKey()
-    select_edgeSizeKey()
-
     //set tooltips
     set_tooltips()
 
-    //calculate the relative size for the edges
-    edgeRank()
-    
     edgeSelectBySize(_edgeCutoff)
     //hide edges with 0 values
     hideZeroValues()

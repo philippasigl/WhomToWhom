@@ -217,7 +217,7 @@ const setRatio = () => network.on("select", function (param) {
 })
 
 const setCoords = () => {
-  let scale = 1.3
+  let scale = 1.6
   network.moveNode('govt',1000*scale,200*scale)
   network.moveNode('hh',1000*scale,-200*scale)
   network.moveNode('icpf',0,500*scale)
